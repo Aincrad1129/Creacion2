@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: GreenPlayer
   m_EditorClassIdentifier: 
   isAlive: 1
-  color_temp: 1
-  Velocity: 4.3
-  JumpVelocity: 4.6
+  index: 1
+  Velocity: 4
+  JumpVelocity: 5

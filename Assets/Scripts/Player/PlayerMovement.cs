@@ -14,7 +14,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Awake()
     {
- 
+
     }
     
     // Start is called before the first frame update
@@ -31,12 +31,14 @@ public class PlayerMovement : MonoBehaviour
     {
         this.transform.position +=  moveVec *player.Velocity * Time.deltaTime;
     }
-    public void MoveInput(InputAction.CallbackContext context) { 
-        moveVec = Vector3.right * context.ReadValue<float>();
+
+    public int getPlayerindex() => player.index;
+    public void Move(float direction) { 
+        moveVec = Vector3.right * direction;
         if (moveVec.x > 0) this.transform.rotation = Quaternion.Euler(Vector3.zero);
         if (moveVec.x < 0) this.transform.rotation = Quaternion.Euler(Vector3.up * 180);
     }
-    public void JumpInput(InputAction.CallbackContext context) {
+    public void Jump() {
         if(OnGround())playerRigidbody.AddForce(Vector3.up * player.JumpVelocity, ForceMode.Impulse);
     }
 
@@ -52,7 +54,5 @@ public class PlayerMovement : MonoBehaviour
     {
     }
 
-    private bool OnGround() {
-        return Physics.Raycast(this.transform.position, Vector3.down,(this.GetComponent<CapsuleCollider>().height / 2 ) + 0.1f); 
-    }
+    private bool OnGround()  => Physics.Raycast(this.transform.position, Vector3.down, (this.GetComponent<CapsuleCollider>().height / 2) + 0.1f); 
 }

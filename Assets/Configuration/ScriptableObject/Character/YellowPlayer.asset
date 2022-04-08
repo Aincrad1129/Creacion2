@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: YellowPlayer
   m_EditorClassIdentifier: 
   isAlive: 1
-  color_temp: 3
-  Velocity: 5
-  JumpVelocity: 5.3
+  index: 3
+  Velocity: 4
+  JumpVelocity: 5

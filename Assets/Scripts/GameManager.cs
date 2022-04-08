@@ -6,14 +6,17 @@ using UnityEngine.InputSystem;
 public class GameManager : MonoBehaviour
 {
     int index = 0;
-    [SerializeField] private List<GameObject> players = new List<GameObject>();
+    [SerializeField] private List<Character> players = new List<Character>();
     PlayerInputManager manager;
+    PlayerInput playerInput;
+    private void Awake()
+    {
+        
+    }
     // Start is called before the first frame update
     void Start()
     {
-        manager = this.GetComponent<PlayerInputManager>();
-        index = Random.Range(0, players.Count);
-        manager.playerPrefab = players[index];
+
     }
 
     // Update is called once per frame
@@ -23,6 +26,6 @@ public class GameManager : MonoBehaviour
     }
     public void AddNewPlayer(InputAction input) {
         index = Random.Range(0,players.Count);
-        manager.playerPrefab = players[index];
+
     }
 }
