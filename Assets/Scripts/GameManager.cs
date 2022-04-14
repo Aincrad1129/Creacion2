@@ -6,12 +6,10 @@ using UnityEngine.InputSystem;
 public class GameManager : MonoBehaviour
 {
     int index = 0;
-    [SerializeField] private List<Character> players = new List<Character>();
-    PlayerInputManager manager;
-    PlayerInput playerInput;
+    [SerializeField] private List<PlayerMovement> _players = new List<PlayerMovement>();
+    public List<PlayerMovement> players { get => _players; }
     private void Awake()
     {
-        
     }
     // Start is called before the first frame update
     void Start()

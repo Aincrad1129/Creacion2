@@ -8,6 +8,8 @@ public class PlayerInputHandler : MonoBehaviour
 {
     private PlayerInput playerInput;
     private PlayerMovement playerMovement;
+    [SerializeField]private GameManager gameManager;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -15,6 +17,7 @@ public class PlayerInputHandler : MonoBehaviour
         var playersMovement = FindObjectsOfType<PlayerMovement>();
         var index = playerInput.playerIndex;
         playerMovement = playersMovement.FirstOrDefault(x => x.getPlayerindex() == index);
+        gameManager.players[index].player.isActive = true;   
     }
 
     // Update is called once per frame
