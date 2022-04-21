@@ -17,7 +17,7 @@ public class PlayerInputHandler : MonoBehaviour
         var playersMovement = FindObjectsOfType<PlayerMovement>();
         var index = playerInput.playerIndex;
         playerMovement = playersMovement.FirstOrDefault(x => x.getPlayerindex() == index);
-        gameManager.players[index].player.isActive = true;   
+        gameManager.players[index].character.isActive = true;   
     }
 
     // Update is called once per frame

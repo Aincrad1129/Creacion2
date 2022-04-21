@@ -2,9 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class Challenge : MonoBehaviour, IChallenge<PlayerMovement[],Vector3>
+public abstract class Challenge : MonoBehaviour, IChallenge
 {
-
+    [SerializeField] public string levelName;
+    [SerializeField] private Vector3 StarSpawpnPoitn;
+    [SerializeField] private Vector3 EndSpawpnPoitn;
+    public bool levelComplete = false;
     private GameManager gameManager => FindObjectOfType<GameManager>();
     // Start is called before the first frame update
     void Start()
@@ -17,10 +20,16 @@ public abstract class Challenge : MonoBehaviour, IChallenge<PlayerMovement[],Vec
     {
 
     }
-    public void Complete(PlayerMovement[] players,Vector3 postion) {
+    public void Complete() {
+        levelComplete = true;
     }
-    public void Restart(PlayerMovement[] players, Vector3 postion) { 
+    public void Restart() { 
     }
+    public void KillCharacter(PlayerMovement player) {
+        if(player.character.isAlive) player.character.isAlive = false;
+        if (gameManager.players.TrueForAll(x => !x.character.isAlive)) Restart();
+    }
+
 }
 
 

@@ -7,7 +7,9 @@ public class GameManager : MonoBehaviour
 {
     int index = 0;
     [SerializeField] private List<PlayerMovement> _players = new List<PlayerMovement>();
+    [SerializeField] private List<Challenge> _challenges = new List<Challenge>();
     public List<PlayerMovement> players { get => _players; }
+    public List<Challenge> challenges { get => _challenges; }
     private void Awake()
     {
     }
