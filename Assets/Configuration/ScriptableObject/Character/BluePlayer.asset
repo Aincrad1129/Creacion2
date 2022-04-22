@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: BluePlayer
   m_EditorClassIdentifier: 
   isAlive: 1
+  isActive: 1
   index: 0
   Velocity: 4
   JumpVelocity: 5

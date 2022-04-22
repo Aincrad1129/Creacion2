@@ -19,13 +19,13 @@ public class FieldOfViewDetec : MonoBehaviour
     {
         foreach (PlayerMovement x in gameManager.players) {
             
-            if (x.player.isActive)
+            if (x.character.isActive)
             {
                 Vector3 playerVector =  x.transform.position - this.transform.position;
                 if (IsInFOV(playerVector, this.transform.right, visionAngle / 2, visionDistance))
                 {
                     print("dead");
-                    x.player.isAlive = false;
+                    x.character.isAlive = false;
                 }
             }
         }

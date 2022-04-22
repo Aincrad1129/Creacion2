@@ -7,7 +7,7 @@ public class PlayerMovement : MonoBehaviour
 {
     [Header ("Character Scriptable Object")]
     [Tooltip ("Se encuentra en la ruta Configuration/ScriptableObject/Character")]
-    [SerializeField] public  Character player;
+    [SerializeField] public  Character character;
     private Animator playerAnimator => this.GetComponent<Animator>();
     private Rigidbody playerRigidbody => this.GetComponent<Rigidbody>();
     private Vector3 moveVec;
@@ -30,7 +30,7 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         IdleAnim();
-         isGround = OnGround();
+         isGround = OnGround2();
         if (isGround)
         {
             playerAnimator.SetBool("Ground", true);
@@ -62,10 +62,10 @@ public class PlayerMovement : MonoBehaviour
     }
     private void LateUpdate()
     {
-        this.transform.position +=  moveVec *player.Velocity * Time.deltaTime;
+        this.transform.position +=  moveVec *character.Velocity * Time.deltaTime;
     }
 
-    public int getPlayerindex() => player.index;
+    public int getPlayerindex() => character.index;
     public void Move(float direction) { 
         moveVec = Vector3.right * direction;
         playerAnimator.SetFloat("Run",Mathf.Abs(direction));
@@ -78,7 +78,7 @@ public class PlayerMovement : MonoBehaviour
         {
             playerAnimator.SetBool("Jump", true);
             playerAnimator.SetBool("Ground", false);
-            playerRigidbody.AddForce(Vector3.up * player.JumpVelocity, ForceMode.Impulse);
+            playerRigidbody.AddForce(Vector3.up * character.JumpVelocity, ForceMode.Impulse);
         }
     }
 
@@ -96,6 +96,17 @@ public class PlayerMovement : MonoBehaviour
     {
     }
 
-    private bool OnGround()  => Physics.Raycast(this.transform.position, Vector3.down, (this.GetComponent<CapsuleCollider>().height / 2) + 0.1f); 
+    private bool OnGround()  => Physics.Raycast(this.transform.position, Vector3.down, (this.GetComponent<CapsuleCollider>().height / 2) + 0.1f);
 
+    private bool OnGround2() {
+         return Physics.SphereCast(this.transform.position, this.GetComponent<CapsuleCollider>().radius, Vector3.down, out RaycastHit hit, (this.GetComponent<CapsuleCollider>().height / 2) - (this.GetComponent<CapsuleCollider>().radius / 2));
+ 
+    }
+    /*
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawLine(this.transform.position, this.transform.position + Vector3.down * (this.GetComponent<CapsuleCollider>().height / 2));
+        Gizmos.DrawSphere(this.transform.position + Vector3.down * ((this.GetComponent<CapsuleCollider>().height / 2) - (this.GetComponent<CapsuleCollider>().radius/2)), this.GetComponent<CapsuleCollider>().radius);
+    }
+    */
 }
