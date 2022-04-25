@@ -82,7 +82,13 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.CompareTag("door"))
+        {
+            other.gameObject.SetActive(false);
+        }
+    }
  
     private void ParkourAcionInput()
     {
