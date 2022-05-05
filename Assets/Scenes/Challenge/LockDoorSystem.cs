@@ -1,4 +1,5 @@
 using System;
+using System.Threading.Tasks;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,7 +13,7 @@ public class LockDoorSystem : MonoBehaviour
     [SerializeField] private GameObject door;
     [SerializeField] private GameObject KeypadUI;
     [SerializeField] private Text passwordText;
-    [SerializeField] private Image light;
+    [SerializeField] private Image lightSignal;
 
     private int indexPassword = 0;
 
@@ -35,25 +36,21 @@ public class LockDoorSystem : MonoBehaviour
         passwordText.text = $"{passwordText.text}* ";
         print(currentPassword);
         indexPassword++;
-        if (indexPassword == password.Length) checkPassword();
+        if (indexPassword == password.Length) CheckPassword();
     }
 
-    private void checkPassword()
+    private void CheckPassword()
     {
-        print(" ");
-        print(currentPassword);
-        print(password);
-
         if (currentPassword == password)
         {
-            light.color = Color.green;
-            StartCoroutine(CompletePassword(false));
+            lightSignal.color = Color.green;
+            CompletePassword(false);
             door.SetActive(false);
         }
         else
         {
-            light.color = Color.red;
-            StartCoroutine(CompletePassword(true));
+            lightSignal.color = Color.red;
+            CompletePassword(true);
             passwordText.text = " ";
             currentPassword = "";
             indexPassword = 0;
@@ -63,9 +60,10 @@ public class LockDoorSystem : MonoBehaviour
     {
         if (col.CompareTag("Player")) KeypadUI.SetActive(true);
     }
-    private IEnumerator CompletePassword(bool active) {
-        yield return new WaitForSeconds(2);
+
+    private async void CompletePassword(bool active) {
+        await Task.Delay(TimeSpan.FromSeconds(2));
         KeypadUI.SetActive(active);
-        light.color = Color.gray;
+        lightSignal.color = Color.gray;
     }
 }
