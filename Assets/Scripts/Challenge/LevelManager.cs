@@ -24,7 +24,7 @@ public class LevelManager : MonoBehaviour
             levels[i] = objectToChange;
         }
         for (int i = 0; i< levels.Count;i++) {
-            levels[i].transform.localPosition = new Vector3(3 + i * 6, 0,0);
+            levels[i].transform.localPosition = new Vector3(levels[0].transform.localPosition.x, levels[0].transform.localPosition.y, -16.2f + i * -32.2f);
         }
     }
 }
