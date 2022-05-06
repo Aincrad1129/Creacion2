@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class ClockChallenge : MonoBehaviour,IChallenge
 {
+    private bool isComplete;
+    [SerializeField] private GameManager gameManager;
     [SerializeField] private Clock mainClock;
     [SerializeField] private List<Clock> clocks = new List<Clock>();
     // Start is called before the first frame update
@@ -27,10 +29,15 @@ public class ClockChallenge : MonoBehaviour,IChallenge
     public void Complete()
     {
         Debug.Log("Complete");
+        isComplete = true;
+        gameManager.checkChallenges();
     }
 
     public void Restart()
     {
         throw new System.NotImplementedException();
     }
+
+    public bool getCompleted() => isComplete;
+
 }

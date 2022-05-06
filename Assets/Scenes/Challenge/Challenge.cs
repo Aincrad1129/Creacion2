@@ -30,6 +30,10 @@ public abstract class Challenge : MonoBehaviour, IChallenge
         if (gameManager.players.TrueForAll(x => !x.character.isAlive)) Restart();
     }
 
+    public bool getCompleted()
+    {
+        throw new System.NotImplementedException();
+    }
 }
 
 

@@ -4,7 +4,8 @@ using UnityEngine;
 
 public interface IChallenge
 {
-
+   
     void Complete();
     void Restart();
+    bool getCompleted();
 }
