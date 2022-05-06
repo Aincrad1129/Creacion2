@@ -53,24 +53,25 @@ public class PlayerLocomotion : MonoBehaviour
     {
 
         HandleFallingAndLanding();
-
+        
         if (playerManager.isInteracting)
             return;
-
+        
         if (isJumping)
             return;
-
+        
         HandleMovement();
         HandleRotation();
     }
     private void HandleMovement()
     {
+        /*
         if (isJumping)
-            return;
+            return;*/
         moveDirection = cameraObject.forward * inputManager.verticalInput;
         moveDirection = moveDirection + cameraObject.right * inputManager.horizontalInput;
         moveDirection.Normalize();
-        moveDirection.y = 0;
+       // moveDirection.y = 0;
 
         if(isSprinting)
         {
@@ -89,10 +90,10 @@ public class PlayerLocomotion : MonoBehaviour
         }
 
 
-       
-       
-        
 
+
+
+        print(moveDirection);
         Vector3 movementVelocity = moveDirection;
         playerRigidbody.velocity = movementVelocity;
 
@@ -101,9 +102,10 @@ public class PlayerLocomotion : MonoBehaviour
 
     private void HandleRotation()
     {
+        /*
         if (isJumping)
             return;
-
+        */
         Vector3 targetDirection = Vector3.zero;
         targetDirection = cameraObject.forward * inputManager.verticalInput;
         targetDirection = targetDirection +cameraObject.right * inputManager.horizontalInput;

@@ -180,6 +180,15 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ChangeCamera"",
+                    ""type"": ""Button"",
+                    ""id"": ""53cb2b63-ee68-4fdb-8184-7d14c32bdab3"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -248,6 +257,28 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""action"": ""Action"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""5571ccef-b5f9-4aff-878e-b40c132523ab"",
+                    ""path"": ""<Keyboard>/c"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ChangeCamera"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""89dc8b51-b5cf-4a01-b6af-b527e0d79cf9"",
+                    ""path"": ""<Gamepad>/rightStickPress"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ChangeCamera"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -262,6 +293,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         m_PlayerActions_B = m_PlayerActions.FindAction("B", throwIfNotFound: true);
         m_PlayerActions_Jump = m_PlayerActions.FindAction("Jump", throwIfNotFound: true);
         m_PlayerActions_Action = m_PlayerActions.FindAction("Action", throwIfNotFound: true);
+        m_PlayerActions_ChangeCamera = m_PlayerActions.FindAction("ChangeCamera", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -357,6 +389,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
     private readonly InputAction m_PlayerActions_B;
     private readonly InputAction m_PlayerActions_Jump;
     private readonly InputAction m_PlayerActions_Action;
+    private readonly InputAction m_PlayerActions_ChangeCamera;
     public struct PlayerActionsActions
     {
         private @PlayerControls m_Wrapper;
@@ -364,6 +397,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         public InputAction @B => m_Wrapper.m_PlayerActions_B;
         public InputAction @Jump => m_Wrapper.m_PlayerActions_Jump;
         public InputAction @Action => m_Wrapper.m_PlayerActions_Action;
+        public InputAction @ChangeCamera => m_Wrapper.m_PlayerActions_ChangeCamera;
         public InputActionMap Get() { return m_Wrapper.m_PlayerActions; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -382,6 +416,9 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @Action.started -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnAction;
                 @Action.performed -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnAction;
                 @Action.canceled -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnAction;
+                @ChangeCamera.started -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnChangeCamera;
+                @ChangeCamera.performed -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnChangeCamera;
+                @ChangeCamera.canceled -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnChangeCamera;
             }
             m_Wrapper.m_PlayerActionsActionsCallbackInterface = instance;
             if (instance != null)
@@ -395,6 +432,9 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @Action.started += instance.OnAction;
                 @Action.performed += instance.OnAction;
                 @Action.canceled += instance.OnAction;
+                @ChangeCamera.started += instance.OnChangeCamera;
+                @ChangeCamera.performed += instance.OnChangeCamera;
+                @ChangeCamera.canceled += instance.OnChangeCamera;
             }
         }
     }
@@ -408,5 +448,6 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         void OnB(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
         void OnAction(InputAction.CallbackContext context);
+        void OnChangeCamera(InputAction.CallbackContext context);
     }
 }

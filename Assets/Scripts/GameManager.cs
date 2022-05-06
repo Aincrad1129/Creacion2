@@ -3,18 +3,31 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+
 public class GameManager : MonoBehaviour
 {
+    [SerializeField] private GameObject player;
+    
     //[SerializeField] private List<PlayerMovement> _players = new List<PlayerMovement>();
-    [SerializeField] private List<IChallenge> _challenges = new List<IChallenge>();
+    [SerializeField] private List<GameObject> _challenges = new List<GameObject>();
+    [SerializeField] private FinalChallange finalChallenge;
     // public List<PlayerMovement> players { get => _players; }
-    public List<IChallenge> challenges { get => _challenges; }
+    public List<GameObject> challenges { get => _challenges; }
+
+    [HideInInspector]public bool finalChallengeUnloke;
+    private bool _pause;
+    public bool pause { get => _pause; }
+
+    private KillPlayer killPlayer;
+
     private void Awake()
     {
     }
     // Start is called before the first frame update
     void Start()
     {
+        killPlayer = FindObjectOfType<KillPlayer>();
+        killPlayer.SetRespawnPoitn(player.GetComponentInParent<Transform>());
     }
 
     // Update is called once per frame
@@ -28,9 +41,17 @@ public class GameManager : MonoBehaviour
     }
     public void checkChallenges() {
         
-        if(challenges.TrueForAll(x => x.getCompleted() == true)){
-            Debug.Log("Unlock Final Level");
+        if(challenges.TrueForAll(x => x.GetComponent<IChallenge>().getCompleted() == true)){
+            finalChallenge.isUnlocked = true;
         }
     }
+
+
+    public void SetFinalChallenge() {
+    }
+    public void setPause(bool state) {
+        _pause = state;
+    }
+   
 }
 
