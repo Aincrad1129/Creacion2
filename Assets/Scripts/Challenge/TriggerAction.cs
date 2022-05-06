@@ -50,7 +50,7 @@ public class TriggerAction : MonoBehaviour
     }
     private void OnTriggerStay(Collider other)
     {
-        actionImageUI.transform.position = cam.WorldToScreenPoint(playerTransform.position + (Vector3.up * 2.5f));
+        actionImageUI.transform.position = cam.WorldToScreenPoint(playerTransform.position + (Vector3.up * 0.5f));
     }
     private void OnTriggerExit(Collider other)
     {

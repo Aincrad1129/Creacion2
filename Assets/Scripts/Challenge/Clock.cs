@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class Clock : MonoBehaviour
 {
@@ -9,7 +10,7 @@ public class Clock : MonoBehaviour
     private int _seconds;
     public int seconds { get=> _seconds; }
 
-    [SerializeField] private Text timeText;
+    [SerializeField] private TMP_Text timeText;
 
     public bool isComplete = false;
     private void Awake()

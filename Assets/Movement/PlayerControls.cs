@@ -261,7 +261,6 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         m_PlayerActions = asset.FindActionMap("Player Actions", throwIfNotFound: true);
         m_PlayerActions_B = m_PlayerActions.FindAction("B", throwIfNotFound: true);
         m_PlayerActions_Jump = m_PlayerActions.FindAction("Jump", throwIfNotFound: true);
-        //m_PlayerActions_Action = m_PlayerActions.FindAction("Action", throwIfNotFound: true);
         m_PlayerActions_Action = m_PlayerActions.FindAction("Action", throwIfNotFound: true);
     }
 
