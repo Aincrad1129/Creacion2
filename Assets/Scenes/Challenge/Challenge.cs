@@ -25,15 +25,12 @@ public abstract class Challenge : MonoBehaviour, IChallenge
     }
     public void Restart() { 
     }
-    public void KillCharacter(PlayerMovement player) {
-        if(player.character.isAlive) player.character.isAlive = false;
-        if (gameManager.players.TrueForAll(x => !x.character.isAlive)) Restart();
+    public void KillCharacter()
+    {
+        //if (player.character.isAlive) player.character.isAlive = false;
+        //if (gameManager.players.TrueForAll(x => !x.character.isAlive)) Restart();
     }
 
-    public bool getCompleted()
-    {
-        throw new System.NotImplementedException();
-    }
 }
 
 

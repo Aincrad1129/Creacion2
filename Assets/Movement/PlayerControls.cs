@@ -175,7 +175,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 {
                     ""name"": ""Action"",
                     ""type"": ""Button"",
-                    ""id"": ""99abe07b-3843-4085-9609-2a8f4bef7ed5"",
+                    ""id"": ""54724f39-3e95-4343-b12c-1eac30e3e053"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -229,7 +229,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""b30438ee-5df1-41d5-92b2-0ce45b33e20b"",
+                    ""id"": ""58dc18bc-b697-48cf-a791-759c4b3669b2"",
                     ""path"": ""<Keyboard>/q"",
                     ""interactions"": """",
                     ""processors"": """",
@@ -240,7 +240,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""837d1d9c-ba60-4fc2-95f9-84acb1e8e35f"",
+                    ""id"": ""7c796d12-6d0d-4623-ae95-02fe4d747292"",
                     ""path"": ""<Gamepad>/buttonSouth"",
                     ""interactions"": """",
                     ""processors"": """",
@@ -261,6 +261,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         m_PlayerActions = asset.FindActionMap("Player Actions", throwIfNotFound: true);
         m_PlayerActions_B = m_PlayerActions.FindAction("B", throwIfNotFound: true);
         m_PlayerActions_Jump = m_PlayerActions.FindAction("Jump", throwIfNotFound: true);
+        //m_PlayerActions_Action = m_PlayerActions.FindAction("Action", throwIfNotFound: true);
         m_PlayerActions_Action = m_PlayerActions.FindAction("Action", throwIfNotFound: true);
     }
 

@@ -20,18 +20,18 @@ public class PreasurePlate : MonoBehaviour
     {
         
     }
-    private void OnTriggerEnter(Collider col)
-    {
-        if (col.CompareTag("Player")) {
-            if (playersAmount < gameManager.players.Count) { 
-                playersAmount++;
-            }
-            if (playersAmount >= minPlayersAmount) target.GetComponent<IAction>().OnEnterAction();
-            if (playersAmount <= minPlayersAmount) platformObject.transform.position += Vector3.down * 0.05f;
+    //private void OnTriggerEnter(Collider col)
+    //{
+    //    if (col.CompareTag("Player")) {
+    //        if (playersAmount < gameManager.players.Count) { 
+    //            playersAmount++;
+    //        }
+    //        if (playersAmount >= minPlayersAmount) target.GetComponent<IAction>().OnEnterAction();
+    //        if (playersAmount <= minPlayersAmount) platformObject.transform.position += Vector3.down * 0.05f;
             
-        }
+    //    }
         
-    }
+    //}
 
     private void OnTriggerExit(Collider col)
     {

@@ -6,10 +6,10 @@ using UnityEngine.InputSystem;
 public class GameManager : MonoBehaviour
 {
     int index = 0;
-    [SerializeField] private List<PlayerMovement> _players = new List<PlayerMovement>();
-    [SerializeField] private List<IChallenge> _challenges = new List<IChallenge>();
-    public List<PlayerMovement> players { get => _players; }
-    public List<IChallenge> challenges { get => _challenges; }
+    //[SerializeField] private List<PlayerMovement> _players = new List<PlayerMovement>();
+    [SerializeField] private List<Challenge> _challenges = new List<Challenge>();
+   // public List<PlayerMovement> players { get => _players; }
+    public List<Challenge> challenges { get => _challenges; }
     private void Awake()
     {
     }
@@ -25,7 +25,7 @@ public class GameManager : MonoBehaviour
         
     }
     public void AddNewPlayer(InputAction input) {
-        index = Random.Range(0,players.Count);
+        //index = Random.Range(0,players.Count);
 
     }
     public void checkChallenges() {

@@ -17,18 +17,18 @@ public class FieldOfViewDetec : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        foreach (PlayerMovement x in gameManager.players) {
+        //foreach (PlayerMovement x in gameManager.players) {
             
-            if (x.character.isActive)
-            {
-                Vector3 playerVector =  x.transform.position - this.transform.position;
-                if (IsInFOV(playerVector, this.transform.right, visionAngle / 2, visionDistance))
-                {
-                    print("dead");
-                    x.character.isAlive = false;
-                }
-            }
-        }
+        //    if (x.character.isActive)
+        //    {
+        //        Vector3 playerVector =  x.transform.position - this.transform.position;
+        //        if (IsInFOV(playerVector, this.transform.right, visionAngle / 2, visionDistance))
+        //        {
+        //            print("dead");
+        //            x.character.isAlive = false;
+        //        }
+        //    }
+        //}
     }
     private void OnDrawGizmos()
     {
