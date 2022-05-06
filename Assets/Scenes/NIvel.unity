@@ -1187,7 +1187,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f28729dbfe565654baa5e29483527139, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameManager: {fileID: 2111688721}
+  gameManager: {fileID: 0}
   mainClock: {fileID: 1442941195}
   clocks:
   - {fileID: 812306343}

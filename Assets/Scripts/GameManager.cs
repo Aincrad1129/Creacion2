@@ -5,10 +5,9 @@ using UnityEngine.InputSystem;
 
 public class GameManager : MonoBehaviour
 {
-    int index = 0;
     //[SerializeField] private List<PlayerMovement> _players = new List<PlayerMovement>();
     [SerializeField] private List<IChallenge> _challenges = new List<IChallenge>();
-   // public List<PlayerMovement> players { get => _players; }
+    // public List<PlayerMovement> players { get => _players; }
     public List<IChallenge> challenges { get => _challenges; }
     private void Awake()
     {
@@ -16,7 +15,6 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
     }
 
     // Update is called once per frame
@@ -29,6 +27,7 @@ public class GameManager : MonoBehaviour
 
     }
     public void checkChallenges() {
+        
         if(challenges.TrueForAll(x => x.getCompleted() == true)){
             Debug.Log("Unlock Final Level");
         }
