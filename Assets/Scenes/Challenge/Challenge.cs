@@ -17,7 +17,7 @@ public abstract class Challenge : MonoBehaviour, IChallenge
 
     // Update is called once per frame
     void Update()
-    {
+    {   
 
     }
     public void Complete() {

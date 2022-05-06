@@ -141,7 +141,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &19326712
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -166,7 +166,7 @@ RectTransform:
   m_GameObject: {fileID: 19326711}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.2, y: 1.2, z: 1.2}
   m_Children:
   - {fileID: 170505153}
   - {fileID: 1385457346}
@@ -3052,7 +3052,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &904024867
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3065,6 +3065,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 343987575bbb2084585711cdbbe7333b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 1791034018}
   gameManager: {fileID: 2001421754}
   visionAngle: 91
   visionDistance: 4.28
@@ -3138,7 +3139,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 904024866}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -18.44648, y: -6.3468895, z: 4.4848747}
+  m_LocalPosition: {x: -15.81, y: -8.03, z: 4.4848747}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 145919779}
@@ -4510,6 +4511,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61df4a21d5f01b5488f5b81b39c30659, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameManager: {fileID: 2001421754}
   switches:
   - {fileID: 1123972152}
   - {fileID: 1837347569}
@@ -4835,6 +4837,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f28729dbfe565654baa5e29483527139, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameManager: {fileID: 0}
   mainClock: {fileID: 19326712}
   clocks:
   - {fileID: 0}
@@ -6584,6 +6587,11 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1698789419}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!4 &1791034018 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 450837180503684545, guid: 2e84d3f28247e5f409a846de68492486, type: 3}
+  m_PrefabInstance: {fileID: 1878210274}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1792553224
 GameObject:
   m_ObjectHideFlags: 0

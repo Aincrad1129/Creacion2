@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class FieldOfViewDetec : MonoBehaviour
 {
+    [SerializeField] private Transform player;
     [SerializeField] private GameManager gameManager;
     // Start is called before the first frame update
     [SerializeField] [Range(0f, 180f)] private float visionAngle;
@@ -17,18 +18,12 @@ public class FieldOfViewDetec : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //foreach (PlayerMovement x in gameManager.players) {
-            
-        //    if (x.character.isActive)
-        //    {
-        //        Vector3 playerVector =  x.transform.position - this.transform.position;
-        //        if (IsInFOV(playerVector, this.transform.right, visionAngle / 2, visionDistance))
-        //        {
-        //            print("dead");
-        //            x.character.isAlive = false;
-        //        }
-        //    }
-        //}
+         Vector3 playerVector = player.position - this.transform.position;
+         if (IsInFOV(playerVector, this.transform.right, visionAngle / 2, visionDistance))
+         {
+             print("dead");
+         }
+
     }
     private void OnDrawGizmos()
     {
@@ -40,6 +35,7 @@ public class FieldOfViewDetec : MonoBehaviour
         Gizmos.color = Color.blue;
         Gizmos.DrawLine(this.transform.position, (Vector2)this.transform.position + p1);
         Gizmos.DrawLine(this.transform.position, (Vector2)this.transform.position + p2);
+        Gizmos.DrawLine(this.transform.position, player.position);
     }
 
     private Vector2 PointForAngle(float angle, float distance) => this.transform.TransformDirection(new Vector2(Mathf.Cos(angle * Mathf.Deg2Rad),Mathf.Sin(angle * Mathf.Deg2Rad))) * distance;
