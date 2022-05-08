@@ -17,14 +17,14 @@ public class TriggerAction : MonoBehaviour
     private ActionButtonEvent actionButtonEvent = new ActionButtonEvent();
     public ActionButtonEvent onactionButtonEvent { get { return actionButtonEvent; } set { actionButtonEvent = value; } }
 
+
     private void Awake(){
         cam = Camera.main;
+        actionImageUI.SetActive(false);
+
     }
 
-    void Update()
-    {
-        
-    }
+
     private void OnEnable() {
         if (playerControls == null)
         {
@@ -50,7 +50,14 @@ public class TriggerAction : MonoBehaviour
     }
     private void OnTriggerStay(Collider other)
     {
-        actionImageUI.transform.position = cam.WorldToScreenPoint(playerTransform.position + (Vector3.up * 0.5f));
+
+
+        
+        actionImageUI.transform.position = playerTransform.position + (Vector3.up * 0.25f);
+        actionImageUI.transform.forward = -cam.transform.forward;
+
+
+
     }
     private void OnTriggerExit(Collider other)
     {
