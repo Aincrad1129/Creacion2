@@ -7,7 +7,7 @@ using UnityEngine.InputSystem;
 public class GameManager : MonoBehaviour
 {
     [SerializeField] private GameObject player;
-    
+    [SerializeField] private Transform startSpawnPoint;
     //[SerializeField] private List<PlayerMovement> _players = new List<PlayerMovement>();
     [SerializeField] private List<GameObject> _challenges = new List<GameObject>();
     [SerializeField] private FinalChallange finalChallenge;
@@ -27,7 +27,7 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         killPlayer = FindObjectOfType<KillPlayer>();
-        killPlayer.SetRespawnPoitn(player.GetComponentInParent<Transform>());
+        killPlayer.SetRespawnPoitn(startSpawnPoint);
     }
 
     // Update is called once per frame

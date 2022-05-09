@@ -15,6 +15,12 @@ public class FieldOfViewDetec : MonoBehaviour
     [Tooltip("Distancia de vision de la camara")]
     [SerializeField] private float visionDistance;
 
+    [Header("Mostrar vision")]
+    [Tooltip("Cantidad de lados")]
+    // Start is called before the first frame update
+    [SerializeField] [Range(0f, 24f)] private int sides;
+    [SerializeField] private Color color;
+
     [Header("IU de la camara")]
     [Tooltip("UI de alerta")]
     [SerializeField] private GameObject alertUI;
@@ -39,8 +45,9 @@ public class FieldOfViewDetec : MonoBehaviour
     void Update()
     {
         Vector3 playerVector = player.position - this.transform.position;
-        if (IsInFOV(playerVector, this.transform.right, visionAngle / 2, visionDistance))
+        if (IsInFOV(playerVector, this.transform.forward, visionAngle / 2, visionDistance))
         {
+            print("player");
             if (!isKilling)
             {
                 isUpdate = false;
@@ -52,7 +59,7 @@ public class FieldOfViewDetec : MonoBehaviour
                     scaleX = 1;
                     bar.transform.localScale = new Vector3(scaleX, 1, 1);
                     isKilling = true;
-                    //killPlayer.Kill();
+                    killPlayer.Kill();
                 }
             }
         }
@@ -73,15 +80,54 @@ public class FieldOfViewDetec : MonoBehaviour
     {
         if (visionAngle <= 0) return;
         float halfVisionAngle = visionAngle / 2;
-        Vector2 p1, p2;
-        p1 = PointForAngle(halfVisionAngle, visionDistance);
-        p2 = PointForAngle(-halfVisionAngle, visionDistance);
-        Gizmos.color = Color.blue;
-        Gizmos.DrawLine(this.transform.position, (Vector2)this.transform.position + p1);
-        Gizmos.DrawLine(this.transform.position, (Vector2)this.transform.position + p2);
+        UnityEditor.Handles.color = color;
+        Vector3 discPostition = this.transform.position + (this.transform.forward * visionDistance);
+        float discRadius = visionDistance * Mathf.Tan(halfVisionAngle * Mathf.Deg2Rad);
+        UnityEditor.Handles.DrawSolidDisc(discPostition, this.transform.forward, discRadius);
+        Gizmos.DrawLine(this.transform.position, this.transform.position +(this.transform.forward * visionDistance));
+        int linesAmount = sides / 4;
+        for (int i = 0; i < linesAmount ; i++) {
+            Vector3[] verts = new Vector3[]
+           {
+                this.transform.position,
+                this.transform.position,
+                discPostition + ((Vector3.Slerp(this.transform.up, this.transform.right, (float)i / linesAmount)) * discRadius),
+                discPostition + ((Vector3.Slerp(this.transform.up, this.transform.right, (float)(i+1) / linesAmount)) * discRadius)
+           };
+            UnityEditor.Handles.DrawSolidRectangleWithOutline(verts, color, color);
+            verts = new Vector3[]
+           {
+                this.transform.position,
+                this.transform.position,
+                discPostition - ((Vector3.Slerp(this.transform.up, this.transform.right, (float)i / linesAmount)) * discRadius),
+                discPostition - ((Vector3.Slerp(this.transform.up, this.transform.right, (float)(i+1) / linesAmount)) * discRadius)
+           };
+            UnityEditor.Handles.DrawSolidRectangleWithOutline(verts, color, color);
+            verts = new Vector3[]
+           {
+                this.transform.position,
+                this.transform.position,
+                discPostition + ((Vector3.Slerp(this.transform.up, -this.transform.right, (float)i / linesAmount)) * discRadius),
+                discPostition + ((Vector3.Slerp(this.transform.up, -this.transform.right, (float)(i+1) / linesAmount)) * discRadius)
+           };
+            UnityEditor.Handles.DrawSolidRectangleWithOutline(verts, color, color);
+            verts = new Vector3[]
+           {
+                this.transform.position,
+                this.transform.position,
+                discPostition - ((Vector3.Slerp(this.transform.up, -this.transform.right, (float)i / linesAmount)) * discRadius),
+                discPostition - ((Vector3.Slerp(this.transform.up, -this.transform.right, (float)(i+1) / linesAmount)) * discRadius)
+           };
+            UnityEditor.Handles.DrawSolidRectangleWithOutline(verts, color, color);
+        }
+        
     }
 
-    private Vector2 PointForAngle(float angle, float distance) => this.transform.TransformDirection(new Vector2(Mathf.Cos(angle * Mathf.Deg2Rad), Mathf.Sin(angle * Mathf.Deg2Rad))) * distance;
+    private bool IsInFOV(Vector3 playerVec, Vector3 thisRight, float maxAngle, float distance) {
+        float angle = Vector3.Angle(playerVec.normalized, thisRight);
+        float maxDistance = distance / Mathf.Cos(angle * Mathf.Deg2Rad);
 
-    private bool IsInFOV(Vector3 playerVec, Vector3 thisRight, float angle, float distance) => Vector3.Angle(playerVec.normalized, thisRight) <= angle && playerVec.magnitude <= distance;
+        return angle <= maxAngle && playerVec.magnitude <= maxDistance;
+    
+    }
 }

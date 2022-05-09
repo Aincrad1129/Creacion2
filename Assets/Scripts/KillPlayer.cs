@@ -31,15 +31,19 @@ public class KillPlayer : MonoBehaviour
         gameManager.setPause(true);
         restartUi.SetActive(true);
         cineMachineSwitch.animator.SetBool("ResetLevel", true);
+        //aqui va las particulars y toca darle un timepo de espera 
         Restart();
     }
 
     public async void Restart() {
+        player.transform.position = respawnPoint.position;
         await Task.Delay(TimeSpan.FromSeconds(timeRestart));
         cineMachineSwitch.animator.SetBool("ResetLevel", false);
-        player.transform.position = respawnPoint.position;
+        cineMachineSwitch.animator.SetBool("WorldCamera", true);
+       
         restartUi.SetActive(false);
         gameManager.setPause(false);
+
     }
     public void SetRespawnPoitn(Transform spawnPoint) => respawnPoint = spawnPoint;
 }
