@@ -10,13 +10,14 @@ public class Clock : MonoBehaviour
     private int _seconds;
     public int seconds { get=> _seconds; }
 
-    [SerializeField] private TMP_Text timeText;
+    [SerializeField] public TMP_Text timeText;
 
     public bool isComplete = false;
     private void Awake()
     {
         _seconds = Random.Range(0, 86399);
         UpdateText();
+        timeText.color = isComplete ? Color.green : Color.black;
     }
 
     private void Start()
@@ -38,6 +39,10 @@ public class Clock : MonoBehaviour
     }
     public void SetTime(int amountSeconds)
     {
+        if (clockChallenge.isLocked) {
+            Debug.Log("Can´t see u change the time");
+            return;
+        }
         if (!isComplete)
         {
             _seconds += amountSeconds;

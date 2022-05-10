@@ -5,24 +5,34 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class LockDoorSystem : MonoBehaviour
+public class LockDoorSystem : MonoBehaviour, IChallenge
 {
-    public string password;
+    [SerializeField] private LightsChallenge lightsChallenge;
+    private bool isComplete;
+    [HideInInspector] public string password;
     private int paswordLength;
     private string currentPassword = "";
-    [SerializeField] private GameObject door;
     [SerializeField] private GameObject KeypadUI;
     [SerializeField] private Text passwordText;
     [SerializeField] private Image lightSignal;
 
-    private int indexPassword = 0;
+    
 
+    private int indexPassword = 0;
+    private void Awake()
+    {
+        int randompasword = UnityEngine.Random.Range(0, 9999);
+        password = randompasword.ToString("0000");
+        lightsChallenge.passwordText.text = password;
+    }
     // Start is called before the first frame update
     void Start()
     {
+        
         paswordLength = password.Length;
         KeypadUI.SetActive(false);
         passwordText.text = " ";
+        
     }
 
     // Update is called once per frame
@@ -45,7 +55,8 @@ public class LockDoorSystem : MonoBehaviour
         {
             lightSignal.color = Color.green;
             CompletePassword(false);
-            door.SetActive(false);
+            lightsChallenge.Complete();
+            //door.SetActive(false);
         }
         else
         {
@@ -56,14 +67,26 @@ public class LockDoorSystem : MonoBehaviour
             indexPassword = 0;
         }
     }
-    private void OnTriggerEnter(Collider col)
+    public void OpenKeyPadUI()
     {
-        if (col.CompareTag("Player")) KeypadUI.SetActive(true);
+        KeypadUI.SetActive(true);
     }
 
     private async void CompletePassword(bool active) {
         await Task.Delay(TimeSpan.FromSeconds(2));
-        KeypadUI.SetActive(active);
+        KeypadUI.SetActive(false);
         lightSignal.color = Color.gray;
     }
+
+    public void Complete()
+    {
+        throw new NotImplementedException();
+    }
+
+    public void Restart()
+    {
+        throw new NotImplementedException();
+    }
+
+    public bool getCompleted() => isComplete;
 }

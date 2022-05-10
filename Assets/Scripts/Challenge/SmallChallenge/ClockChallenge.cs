@@ -5,12 +5,14 @@ using UnityEngine;
 public class ClockChallenge : MonoBehaviour,IChallenge
 {
     private bool isComplete;
-    [SerializeField] private GameManager gameManager;
+    [SerializeField] private ClockEnergyChallenge clockEnergyChallenge;
     [SerializeField] private Clock mainClock;
     [SerializeField] private List<Clock> clocks = new List<Clock>();
+    [HideInInspector]public bool isLocked = true;
     // Start is called before the first frame update
     void Start()
     {
+         isLocked = true;
     }
 
     // Update is called once per frame
@@ -22,7 +24,9 @@ public class ClockChallenge : MonoBehaviour,IChallenge
         if (clock.seconds == mainClock.seconds)
         {
             clock.isComplete = true;
-            print(clock.name + "completed");
+            clock.timeText.color = Color.green;
+
+           print(clock.name + "completed");
         }
         if (clocks.TrueForAll(x => x.isComplete)) Complete();
     }
@@ -30,7 +34,7 @@ public class ClockChallenge : MonoBehaviour,IChallenge
     {
         Debug.Log("Complete");
         isComplete = true;
-        gameManager.checkChallenges();
+        clockEnergyChallenge.Complete();
     }
 
     public void Restart()

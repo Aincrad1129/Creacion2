@@ -8,35 +8,40 @@ public class Switch : MonoBehaviour
     private bool _state;
     public bool state { get => _state; }
     private Material mat;
-    
-    [HideInInspector]public bool isChanging;
+
+    [HideInInspector] public bool isChanging;
     [SerializeField] private SwitchChallenge switchChallenge;
     // Start is called before the first frame update
     private void Awake()
     {
-        mat = this.GetComponent<Renderer>().material;
         _state = (int)Random.Range(0, 5) % 2 == 0;
-        mat.color = _state ? Color.green : Color.red;
+        mat = switchChallenge.GetMaterial(_state);
+        this.GetComponent<MeshRenderer>().material = mat;
     }
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
-    public void setState(GameObject button) {
-        if(buttonSwitchs.Find(x => x == button)) _state = !_state;
-           isChanging = false;
-           mat.color = _state ? Color.green : Color.red;
-           switchChallenge.Check();
+    public void setState(GameObject button)
+    {
+        if (buttonSwitchs.Find(x => x == button)) _state = !_state;
+        isChanging = false;
+        mat = switchChallenge.GetMaterial(_state);
+        this.GetComponent<MeshRenderer>().material = mat;
+        switchChallenge.Check();
     }
-    public void randomState() {
+    public void randomState()
+    {
         _state = (int)Random.Range(0, 5) % 2 == 0;
-        mat.color = _state ? Color.green : Color.red;
+        mat = switchChallenge.GetMaterial(_state);
+        this.GetComponent<MeshRenderer>().material = mat;
         switchChallenge.CheckRandomState();
     }
+
 }

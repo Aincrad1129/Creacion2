@@ -43,6 +43,10 @@ public class GameManager : MonoBehaviour
         
         if(challenges.TrueForAll(x => x.GetComponent<IChallenge>().getCompleted() == true)){
             finalChallenge.isUnlocked = true;
+            finalChallenge.door.SetActive(false);
+        }
+        for (int i = 0; i < _challenges.Count; i++) {
+            if (_challenges[i].GetComponent<IChallenge>().getCompleted()) finalChallenge.SetButton(i);
         }
     }
 

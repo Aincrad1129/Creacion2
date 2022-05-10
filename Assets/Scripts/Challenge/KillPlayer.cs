@@ -14,6 +14,9 @@ public class KillPlayer : MonoBehaviour
     [SerializeField] private GameObject restartUi;
     [SerializeField] private CineMachineSwitch cineMachineSwitch;
     [SerializeField] private int timeRestart;
+    public int playerTimeRestart { get => timeRestart; }
+    private bool _playerDead;
+    public bool playerDead { get => _playerDead; }
 
     private Transform respawnPoint;
     // Start is called before the first frame update
@@ -28,6 +31,7 @@ public class KillPlayer : MonoBehaviour
     }
     public  void Kill()
     {
+        _playerDead = true; 
         gameManager.setPause(true);
         restartUi.SetActive(true);
         cineMachineSwitch.animator.SetBool("ResetLevel", true);
@@ -38,9 +42,9 @@ public class KillPlayer : MonoBehaviour
     public async void Restart() {
         player.transform.position = respawnPoint.position;
         await Task.Delay(TimeSpan.FromSeconds(timeRestart));
+        _playerDead = false;
         cineMachineSwitch.animator.SetBool("ResetLevel", false);
         cineMachineSwitch.animator.SetBool("WorldCamera", true);
-       
         restartUi.SetActive(false);
         gameManager.setPause(false);
 

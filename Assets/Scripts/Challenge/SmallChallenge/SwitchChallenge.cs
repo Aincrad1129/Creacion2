@@ -5,11 +5,16 @@ using UnityEngine;
 public class SwitchChallenge : MonoBehaviour, IChallenge
 {
     private bool isComplete;
-    [SerializeField] private GameManager gameManager;
+    [SerializeField] private ClockEnergyChallenge clockEnergyChallenge;
     [SerializeField] private List<Switch> switches = new List<Switch>();
+    [SerializeField] private GameObject endObject;
+    [SerializeField] private Material activeMaterial;
+    [SerializeField] private Material enactiveMaterial;
+
     // Start is called before the first frame update
     void Start()
     {
+        endObject.GetComponent<MeshRenderer>().material = activeMaterial;
         CheckRandomState();
     }
 
@@ -36,7 +41,8 @@ public class SwitchChallenge : MonoBehaviour, IChallenge
     {
         Debug.Log("Complete");
         isComplete = true;
-        gameManager.checkChallenges();
+        clockEnergyChallenge.UnlockClocks();
+        endObject.GetComponent<MeshRenderer>().material = enactiveMaterial;
     }
 
     public void Restart()
@@ -44,5 +50,6 @@ public class SwitchChallenge : MonoBehaviour, IChallenge
         throw new System.NotImplementedException();
     }
     public bool getCompleted() => isComplete;
+    public Material GetMaterial(bool state) => state ?  enactiveMaterial : activeMaterial;
 }
 

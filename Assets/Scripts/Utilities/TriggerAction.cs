@@ -53,7 +53,7 @@ public class TriggerAction : MonoBehaviour
 
 
         
-        actionImageUI.transform.position = playerTransform.position + (Vector3.up * 0.25f);
+        actionImageUI.transform.position = playerTransform.position + (Vector3.up * 1f);
         actionImageUI.transform.forward = -cam.transform.forward;
 
 
