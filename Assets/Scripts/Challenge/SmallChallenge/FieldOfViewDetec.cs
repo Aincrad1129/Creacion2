@@ -118,6 +118,7 @@ public class FieldOfViewDetec : MonoBehaviour
     }
     private async void PlayerEnter()
     {
+        if (gameManager.pause) return;
         if (!isOn) return;
         _isviewingPlayer = true;
         meshRenderer.material = alertaMat;
@@ -127,7 +128,6 @@ public class FieldOfViewDetec : MonoBehaviour
         while (Time.time < timer)
         {
             if (!isviewingPlayer || !isOn) return;
-            print(scaleX);
             scaleX = (Time.time +cameraTime - timer) / cameraTime;
             bar.transform.localScale = new Vector3(scaleX, 1, 1);
             await Task.Yield();

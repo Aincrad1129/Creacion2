@@ -34,7 +34,6 @@ public class FinalChallange : MonoBehaviour, IChallenge
         killPlayer = FindObjectOfType<KillPlayer>();
         startPositionLaser = laser.transform.position;
         platforms.AddRange(plataformsParent.GetComponentsInChildren<DesaparecerPlatf>());
-        moveLaser = true;
     }
 
     // Update is called once per frame
@@ -66,12 +65,12 @@ public class FinalChallange : MonoBehaviour, IChallenge
 
     public async void Restart()
     {
-        killPlayer.Kill();
+        if(!killPlayer.playerDead)killPlayer.Kill();
         moveLaser = false;
         await Task.Delay(TimeSpan.FromSeconds(killPlayer.playerTimeRestart / 2));
         laser.transform.position = startPositionLaser;
-
-        platforms.ForEach(x => x.gameObject.SetActive(true));
+        platforms.ForEach(x => print("restart"));
+        platforms.ForEach(x => x.RestartPlatform());
     }
 
     public void SetButton(int index) {

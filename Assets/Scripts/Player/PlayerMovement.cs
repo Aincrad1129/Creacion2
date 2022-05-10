@@ -1,15 +1,17 @@
 //using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
+    [SerializeField] GameManager gameManager;
     PlayerControls playerControls;
     private Animator playerAnimator ;
     private Rigidbody playerRigidbody ;
     private Vector3 moveVec;
-    private bool isGround;
+    public bool isGround;
     private Transform cameraTransform;
     private Vector3 directionInput;
 
@@ -61,6 +63,7 @@ public class PlayerMovement : MonoBehaviour
             playerAnimator.SetBool("Jump", false);
             playerAnimator.SetFloat("Falling", playerRigidbody.velocity.y);
         }
+        if (gameManager.pause) return;
         Move();
         Rotate();
         
@@ -71,16 +74,45 @@ public class PlayerMovement : MonoBehaviour
     }
 
     public void Move() {
+
         playerAnimator.SetFloat("Run",   Mathf.Clamp(Mathf.Abs(directionInput.magnitude),0,1));
         moveVec = cameraTransform.forward * directionInput.y;
         moveVec = moveVec + cameraTransform.right * directionInput.x;
-        
+        moveVec.y = 0;
         moveVec.Normalize();
-        this.transform.position += moveVec * playerSpeed * Time.deltaTime;
+        Vector3 currentHorizontalVelocity = GetHorizontalVelocity();
+        playerRigidbody.AddForce(moveVec * playerSpeed- currentHorizontalVelocity, ForceMode.VelocityChange);
+        //this.transform.position += moveVec * playerSpeed * Time.deltaTime;
         
     }
+
+    private Vector3 GetHorizontalVelocity()
+    {
+        Vector3 horizontalVelocity = playerRigidbody.velocity;
+        horizontalVelocity.y = 0;
+        return horizontalVelocity;
+    }
+
+    private void Rotate()
+    {
+        Vector3 targetDirection = Vector3.zero;
+        targetDirection = cameraTransform.forward * directionInput.x;
+        targetDirection = targetDirection + cameraTransform.right * -directionInput.y;
+        targetDirection.Normalize();
+        targetDirection.y = 0;
+
+        if (targetDirection == Vector3.zero)
+            targetDirection = transform.forward;
+
+        Quaternion targetRotation = Quaternion.LookRotation(targetDirection);
+        Quaternion playerRotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+
+        transform.rotation = playerRotation;
+    }
+
     public void Jump()
     {
+        if (gameManager.pause) return;
         if (isGround)
         {
             playerAnimator.SetBool("Jump", true);
@@ -97,25 +129,10 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    private void Rotate() {
-        Vector3 targetDirection = Vector3.zero;
-        targetDirection = cameraTransform.forward * directionInput.x;
-        targetDirection = targetDirection + cameraTransform.right * -directionInput.y;
-        targetDirection.Normalize();
-        targetDirection.y = 0;
-
-        if (targetDirection == Vector3.zero)
-            targetDirection = transform.forward;
-
-        Quaternion targetRotation = Quaternion.LookRotation(targetDirection);
-        Quaternion playerRotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
-
-        transform.rotation = playerRotation;
-    }
-
+  
 
  
-    private bool OnGround() => Physics.SphereCast(this.transform.position, this.GetComponent<CapsuleCollider>().radius, Vector3.down, out RaycastHit hit, (this.GetComponent<CapsuleCollider>().height / 2) - (this.GetComponent<CapsuleCollider>().radius / 2));
+    private bool OnGround() => Physics.SphereCast(this.transform.position, this.GetComponent<CapsuleCollider>().radius - 0.01f, Vector3.down, out RaycastHit hit, ((this.GetComponent<CapsuleCollider>().height / 2) - (this.GetComponent<CapsuleCollider>().radius / 2))+ 0.5f);
  
     
 }

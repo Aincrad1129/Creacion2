@@ -10,7 +10,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Transform startSpawnPoint;
     //[SerializeField] private List<PlayerMovement> _players = new List<PlayerMovement>();
     [SerializeField] private List<GameObject> _challenges = new List<GameObject>();
-    [SerializeField] private FinalChallange finalChallenge;
+    [SerializeField] public FinalChallange finalChallenge;
     // public List<PlayerMovement> players { get => _players; }
     public List<GameObject> challenges { get => _challenges; }
 

@@ -35,6 +35,7 @@ public class KillPlayer : MonoBehaviour
         gameManager.setPause(true);
         restartUi.SetActive(true);
         cineMachineSwitch.animator.SetBool("ResetLevel", true);
+        if (gameManager.finalChallenge.isUnlocked) gameManager.finalChallenge.Restart();
         //aqui va las particulars y toca darle un timepo de espera 
         Restart();
     }

@@ -4,9 +4,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 public class LockDoorSystem : MonoBehaviour, IChallenge
 {
+    [SerializeField] private GameManager gameManager;
     [SerializeField] private LightsChallenge lightsChallenge;
     private bool isComplete;
     [HideInInspector] public string password;
@@ -16,7 +18,10 @@ public class LockDoorSystem : MonoBehaviour, IChallenge
     [SerializeField] private Text passwordText;
     [SerializeField] private Image lightSignal;
 
-    
+    [SerializeField] private EventSystem eventSystem;
+    [SerializeField] private GameObject StartButtonUI;
+
+
 
     private int indexPassword = 0;
     private void Awake()
@@ -44,7 +49,6 @@ public class LockDoorSystem : MonoBehaviour, IChallenge
     {
         currentPassword = $"{currentPassword}{number}";
         passwordText.text = $"{passwordText.text}* ";
-        print(currentPassword);
         indexPassword++;
         if (indexPassword == password.Length) CheckPassword();
     }
@@ -70,12 +74,16 @@ public class LockDoorSystem : MonoBehaviour, IChallenge
     public void OpenKeyPadUI()
     {
         KeypadUI.SetActive(true);
+        eventSystem.SetSelectedGameObject(StartButtonUI);
+        gameManager.setPause(true);
     }
 
     private async void CompletePassword(bool active) {
         await Task.Delay(TimeSpan.FromSeconds(2));
         KeypadUI.SetActive(false);
         lightSignal.color = Color.gray;
+        gameManager.setPause(false);
+
     }
 
     public void Complete()

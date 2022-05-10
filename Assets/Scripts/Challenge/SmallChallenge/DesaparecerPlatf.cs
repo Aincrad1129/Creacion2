@@ -42,4 +42,7 @@ public class DesaparecerPlatf : MonoBehaviour
         await Task.Delay(seconds * 1000);
         this.gameObject.SetActive(false);
     }
+    public void RestartPlatform() {
+        this.gameObject.SetActive(true);
+    }
 }
