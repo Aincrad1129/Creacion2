@@ -54,4 +54,11 @@ public class LightsChallenge : MonoBehaviour, IChallenge
         passwordText.gameObject.SetActive(false);
 
     }
+
+    public bool AnyCameraViewPLayer() {
+        for (int i = 0; i < fieldOfViewDetec.Count; i++) {
+            if (fieldOfViewDetec[i].isviewingPlayer) return true;
+        }
+        return false;
+    }
 }

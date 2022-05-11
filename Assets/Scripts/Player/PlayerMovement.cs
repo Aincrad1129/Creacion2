@@ -18,6 +18,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float rotationSpeed;
     [SerializeField] private float jumpSpeed;
     [SerializeField] private float playerSpeed;
+    [SerializeField] private LayerMask ground;
+
 
     private void Awake()
     {

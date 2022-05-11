@@ -16,12 +16,12 @@ public class ObjectCollider : MonoBehaviour
 
     void OnTriggerEnter(Collider collider)
     {
-        if (collider == playerCollider) CollideWithPlayerEnter();
+        if (collider == playerCollider || playerCollider == null) CollideWithPlayerEnter();
     }
 
 
     void OnTriggerExit(Collider collider)
     {
-        if (collider == playerCollider) CollideWithPlayerExit();
+        if (collider == playerCollider || playerCollider == null) CollideWithPlayerExit();
     }
 }

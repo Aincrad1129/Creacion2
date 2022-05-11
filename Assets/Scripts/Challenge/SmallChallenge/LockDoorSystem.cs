@@ -79,6 +79,8 @@ public class LockDoorSystem : MonoBehaviour, IChallenge
     }
     public void OpenKeyPadUI()
     {
+
+        if (lightsChallenge.AnyCameraViewPLayer()) return;
         KeypadUI.SetActive(true);
         eventSystem.SetSelectedGameObject(StartButtonUI);
         gameManager.setPause(true);
