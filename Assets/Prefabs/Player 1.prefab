@@ -128,6 +128,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 68678fb99dc602c43a9b24030459e0a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameManager: {fileID: 0}
+  isGround: 0
   rotationSpeed: 7
   jumpSpeed: 7
   playerSpeed: 5

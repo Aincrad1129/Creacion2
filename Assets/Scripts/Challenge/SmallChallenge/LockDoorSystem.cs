@@ -20,6 +20,7 @@ public class LockDoorSystem : MonoBehaviour, IChallenge
 
     [SerializeField] private EventSystem eventSystem;
     [SerializeField] private GameObject StartButtonUI;
+    private bool CanPress = false;
 
 
 
@@ -47,6 +48,9 @@ public class LockDoorSystem : MonoBehaviour, IChallenge
     }
     public void getNumber(string number)
     {
+        if (!CanPress)
+            return;
+
         currentPassword = $"{currentPassword}{number}";
         passwordText.text = $"{passwordText.text}* ";
         indexPassword++;
@@ -55,6 +59,8 @@ public class LockDoorSystem : MonoBehaviour, IChallenge
 
     private void CheckPassword()
     {
+        CanPress = false;
+
         if (currentPassword == password)
         {
             lightSignal.color = Color.green;
@@ -76,10 +82,11 @@ public class LockDoorSystem : MonoBehaviour, IChallenge
         KeypadUI.SetActive(true);
         eventSystem.SetSelectedGameObject(StartButtonUI);
         gameManager.setPause(true);
+        CanPress = true;
     }
 
     private async void CompletePassword(bool active) {
-        await Task.Delay(TimeSpan.FromSeconds(2));
+        await Task.Delay(TimeSpan.FromSeconds(0.75f));
         KeypadUI.SetActive(false);
         lightSignal.color = Color.gray;
         gameManager.setPause(false);
