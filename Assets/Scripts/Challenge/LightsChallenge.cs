@@ -18,12 +18,26 @@ public class LightsChallenge : MonoBehaviour, IChallenge
     [SerializeField] private Material activeMaterial;
     private bool isLightOn;
 
+    [SerializeField] private string OffSound;
+    [SerializeField] private string OnSound;
+    [SerializeField] private string AbrirPuerta;
+    private AudioManager audioManager;
+    [SerializeField] private Animator abrirL, abrirR;
+
     // Start is called before the first frame update
+
+    void Awake()
+    {
+        audioManager = FindObjectOfType<AudioManager>();
+    }
     void Start()
     {
         passwordText.text = lockDoorSystem.password;
         passwordText.gameObject.SetActive(false);
-        print(lockDoorSystem.password);
+        abrirL.GetComponent<Animator>();
+        abrirL.enabled = false;
+        abrirR.GetComponent<Animator>();
+        abrirR.enabled = false;
     }
 
     // Update is called once per frame
@@ -37,6 +51,8 @@ public class LightsChallenge : MonoBehaviour, IChallenge
         Debug.Log("Complete:" + GetType().Name);
         isComplete = true;
         completeIndicator.GetComponent<MeshRenderer>().material = activeMaterial;
+        abrirL.enabled = true;
+        abrirR.enabled = true;
         gameManager.checkChallenges();
     }
 
@@ -48,12 +64,13 @@ public class LightsChallenge : MonoBehaviour, IChallenge
     }
 
     public async void SetLigth() {
+        audioManager.PlaySound(OffSound);
         passwordText.gameObject.SetActive(true);
         fieldOfViewDetec.ForEach(x => x.SwitchOn_OFFCamera(false));
         await Task.Delay(TimeSpan.FromSeconds(timeLightsOff));
         fieldOfViewDetec.ForEach(x => x.SwitchOn_OFFCamera(true));
         passwordText.gameObject.SetActive(false);
-
+        audioManager.PlaySound(OnSound);
     }
 
     public bool AnyCameraViewPLayer() {

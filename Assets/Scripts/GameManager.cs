@@ -32,6 +32,7 @@ public class GameManager : MonoBehaviour
     {
         killPlayer = FindObjectOfType<KillPlayer>();
         killPlayer.SetRespawnPoitn(startSpawnPoint);
+        audioManager.PlaySound(rigthSoundName);
     }
 
 
@@ -40,10 +41,10 @@ public class GameManager : MonoBehaviour
 
     }
     public void checkChallenges() {
-        audioManager.PlaySound(rigthSoundName);
+
         if (challenges.TrueForAll(x => x.GetComponent<IChallenge>().getCompleted() == true)){
             finalChallenge.isUnlocked = true;
-            finalChallenge.door.SetActive(false);
+            //finalChallenge.door.SetActive(false);
         }
         for (int i = 0; i < _challenges.Count; i++) {
             if (_challenges[i].GetComponent<IChallenge>().getCompleted()) finalChallenge.SetButton(i);

@@ -1,4 +1,3 @@
-//using System;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -8,8 +7,8 @@ public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] GameManager gameManager;
     PlayerControls playerControls;
-    private Animator playerAnimator ;
-    private Rigidbody playerRigidbody ;
+    private Animator playerAnimator;
+    private Rigidbody playerRigidbody;
     private Vector3 moveVec;
     public bool isGround;
     private Transform cameraTransform;
@@ -54,14 +53,13 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
+        //audioManager.PlaySound(walkSoundName);
         isGround = OnGround();
         playerAnimator.SetBool("Ground", isGround);
         playerAnimator.SetFloat("Falling", playerRigidbody.velocity.y);
         if (gameManager.pause) return;
         Move();
         Rotate();
-
-
     }
     private void LateUpdate()
     {
@@ -73,7 +71,9 @@ public class PlayerMovement : MonoBehaviour
 
         if (gameManager.pause)
             return;
+        if(playerRigidbody.velocity.magnitude > 1)
         audioManager.PlaySound(walkSoundName);
+
         playerAnimator.SetFloat("Run",   Mathf.Clamp(Mathf.Abs(directionInput.magnitude),0,1));
         moveVec = cameraTransform.forward * directionInput.y;
         moveVec = moveVec + cameraTransform.right * directionInput.x;
@@ -142,18 +142,12 @@ public class PlayerMovement : MonoBehaviour
 
 
     private bool OnGround() {
-        bool ground;
-       
+        
+        bool ground;  
         RaycastHit hit;
-        //ground = Physics.SphereCast(this.transform.position, this.GetComponent<CapsuleCollider>().radius - 0.01f, Vector3.down, out hit, ((this.GetComponent<CapsuleCollider>().height / 2) - (this.GetComponent<CapsuleCollider>().radius / 2)) + 0.2f);
         ground = Physics.BoxCast(this.transform.position, this.transform.localScale / 32, Vector3.down,out hit , Quaternion.identity, (this.GetComponent<CapsuleCollider>().height / 2) + 0.1f);
-        //print(hit.transform.gameObject.name);
         if (ground)
             playerAnimator.SetBool("Jump", false);
         return ground;
     }
-    
-    //Physics.BoxCast(this.transform.position, this.transform.localScale / 4, Vector3.down, Quaternion.identity, (this.GetComponent<CapsuleCollider>().height / 2) + 0.1f);
-   
-
 }

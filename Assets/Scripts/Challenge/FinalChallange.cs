@@ -22,10 +22,14 @@ public class FinalChallange : MonoBehaviour, IChallenge
     [HideInInspector]public bool isUnlocked;
     private bool moveLaser = false;
 
+    [SerializeField] private string FinalSound, Fondo;
+    private AudioManager audioManager;
+
     private KillPlayer killPlayer;
 
     void Awake() {
         finalCollider.CollideWithPlayerEnter += () => Complete();
+        audioManager = FindObjectOfType<AudioManager>();
     }
     // Start is called before the first frame update
     void Start()
@@ -38,13 +42,16 @@ public class FinalChallange : MonoBehaviour, IChallenge
     // Update is called once per frame
     void Update()
     {
-        if (moveLaser) {
+        if (moveLaser) 
+        {
+            audioManager.PlaySound(FinalSound);
             laser.transform.position += (Vector3.up * 0.5f) * Time.deltaTime;
         }
         if (killPlayer.playerDead)
         {
             laser.transform.position = startPositionLaser;
             moveLaser = false;
+            audioManager.StopSound(FinalSound);
         }
         
     }
@@ -79,6 +86,7 @@ public class FinalChallange : MonoBehaviour, IChallenge
     {
         if (other.CompareTag("Player")) {
             if (isUnlocked) {
+                audioManager.StopSound(Fondo);
                 cineMachineSwitch.animator.SetBool("WorldCamera", true);
                 gameManager.finalChallengeUnloke = true;
                 killPlayer.SetRespawnPoitn(respawnPoint);
@@ -91,6 +99,7 @@ public class FinalChallange : MonoBehaviour, IChallenge
     {
         await Task.Delay(TimeSpan.FromSeconds(timeToStartMovePlatform));
         moveLaser = true;
+        audioManager.PlaySound(FinalSound);
         /*
         while (!killPlayer.playerDead || !isComplete)
         {

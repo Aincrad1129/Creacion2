@@ -10,6 +10,22 @@ public class PanelChallenge : MonoBehaviour,IChallenge
     [SerializeField] private FieldOfViewDetec fieldOfViewDetec;
     [SerializeField] private GameObject completeIndicator;
     [SerializeField] private Material activeMaterial;
+    [SerializeField] private Animator abrirL, abrirR;
+    [SerializeField] private string AbrirPuerta;
+    private AudioManager audioManager;
+    void Awake()
+    {
+        audioManager = FindObjectOfType<AudioManager>();
+    }
+
+    void Start()
+    {
+        abrirL.GetComponent<Animator>();
+        abrirL.enabled = false;
+        abrirR.GetComponent<Animator>();
+        abrirR.enabled = false;
+
+    }
     public void Complete()
     {
         if (!fieldOfViewDetec.isviewingPlayer)
@@ -17,10 +33,15 @@ public class PanelChallenge : MonoBehaviour,IChallenge
             Debug.Log("Complete:" + GetType().Name);
             isComplete = true;
             completeIndicator.GetComponent<MeshRenderer>().material = activeMaterial;
+            audioManager.PlaySound(AbrirPuerta);
+            abrirL.enabled = true;
+            abrirR.enabled = true;
             gameManager.checkChallenges();
         }
         else {
             Debug.Log("Can´t see u to unlock the panel");
+            abrirL.enabled = false;
+            abrirR.enabled = false;
         }
     }
 

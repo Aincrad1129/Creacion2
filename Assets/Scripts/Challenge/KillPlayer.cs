@@ -7,7 +7,6 @@ using System.Threading.Tasks;
 public class KillPlayer : MonoBehaviour
 {
     [SerializeField] private GameObject player;
-
     [SerializeField] GameManager gameManager;
     [Header("Respaw")]
     [Tooltip(" Object de la imagen de respawn")]

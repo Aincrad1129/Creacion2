@@ -9,10 +9,23 @@ public class ClockChallenge : MonoBehaviour,IChallenge
     [SerializeField] private Clock mainClock;
     [SerializeField] private List<Clock> clocks = new List<Clock>();
     [HideInInspector]public bool isLocked = true;
+    [SerializeField] private Animator abrirL, abrirR;
+    [SerializeField] private string AbrirPuerta;
+    private AudioManager audioManager;
     // Start is called before the first frame update
+    
+    void Awake()
+    {
+        audioManager = FindObjectOfType<AudioManager>();
+    }
+    
     void Start()
     {
          isLocked = true;
+        abrirL.GetComponent<Animator>();
+        abrirL.enabled = false;
+        abrirR.GetComponent<Animator>();
+        abrirR.enabled = false;
     }
 
     // Update is called once per frame
@@ -35,6 +48,9 @@ public class ClockChallenge : MonoBehaviour,IChallenge
         Debug.Log("Complete");
         isComplete = true;
         clockEnergyChallenge.Complete();
+        audioManager.PlaySound(AbrirPuerta);
+        abrirL.enabled = true;
+        abrirR.enabled = true;
     }
 
     public void Restart()

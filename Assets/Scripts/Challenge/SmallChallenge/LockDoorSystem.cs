@@ -24,10 +24,12 @@ public class LockDoorSystem : MonoBehaviour, IChallenge
     private bool CanPress = false;
 
     [Header("Sounds")]
-    [Tooltip("Rigth soun name")]
+    [Tooltip("Rigth sound name")]
     [SerializeField] private string rigthSoundName;
-    [Tooltip("Wrong soun name")]
+    [Tooltip("Wrong sound name")]
     [SerializeField] private string WrongSoundName;
+    [Tooltip("Type sound name")]
+    [SerializeField] private string TypeSoundName;
     private AudioManager audioManager;
 
     private int indexPassword = 0;
@@ -45,7 +47,6 @@ public class LockDoorSystem : MonoBehaviour, IChallenge
         paswordLength = password.Length;
         KeypadUI.SetActive(false);
         passwordText.text = " ";
-        
     }
 
     public void getNumber(string number)
@@ -56,6 +57,7 @@ public class LockDoorSystem : MonoBehaviour, IChallenge
         currentPassword = $"{currentPassword}{number}";
         passwordText.text = $"{passwordText.text}* ";
         indexPassword++;
+        audioManager.PlaySound(TypeSoundName);
         if (indexPassword == password.Length) CheckPassword();
     }
 

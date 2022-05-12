@@ -21,7 +21,6 @@ public class TriggerAction : MonoBehaviour
     private void Awake(){
         cam = Camera.main;
         actionImageUI.SetActive(false);
-
     }
 
 
@@ -50,14 +49,8 @@ public class TriggerAction : MonoBehaviour
     }
     private void OnTriggerStay(Collider other)
     {
-
-
-        
         actionImageUI.transform.position = playerTransform.position + (Vector3.up * 1f);
         actionImageUI.transform.forward = -cam.transform.forward;
-
-
-
     }
     private void OnTriggerExit(Collider other)
     {

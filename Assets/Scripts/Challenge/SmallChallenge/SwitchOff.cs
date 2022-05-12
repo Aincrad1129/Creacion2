@@ -10,14 +10,19 @@ public class SwitchOff : MonoBehaviour
     [SerializeField] private List<GameObject> cameras = new List<GameObject>();
     [SerializeField] private List<GameObject> lights = new List<GameObject>();
     [SerializeField] private List<GameObject> panels = new List<GameObject>();
-    // Start is called before the first frame update
+
+    [SerializeField] private string ActivateSound;
+    AudioManager audioManager;
+    void Awake()
+    {
+        audioManager = FindObjectOfType<AudioManager>();
+    }
     void Start()
     {
-        
-    }
 
-    // Update is called once per frame
-    void Update()
+    }
+// Update is called once per frame
+void Update()
     {
         
     }
@@ -29,6 +34,7 @@ public class SwitchOff : MonoBehaviour
     public async void TurnOn() {
 
         await Task.Delay(TimeSpan.FromSeconds(time));
-        cameras.ForEach(x => x.GetComponent<FieldOfViewDetec>().SwitchOn_OFFCamera(true));   
+        cameras.ForEach(x => x.GetComponent<FieldOfViewDetec>().SwitchOn_OFFCamera(true));
+        audioManager.PlaySound(ActivateSound);
     }
 }

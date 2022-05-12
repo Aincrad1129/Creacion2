@@ -21,6 +21,7 @@ public class AudioManager : MonoBehaviour
         }
 
     }
+
     // Update is called once per frame
     public void PlaySound(string clipName)
     {
@@ -28,7 +29,7 @@ public class AudioManager : MonoBehaviour
             Sounds s = Array.Find(sounds, sound => sound.name == clipName);
             if (s == null)
             {
-                Debug.LogWarning("clipName :" + s.name + " not founded");
+                //Debug.LogWarning("clipName :" + s.name + " not founded");
                 return;
             }
        if (!s.source.isPlaying)  s.source.Play();
@@ -42,7 +43,7 @@ public class AudioManager : MonoBehaviour
         Sounds s = Array.Find(sounds, sound => sound.name == clipName);
         if (s == null)
         {
-            Debug.LogWarning("clipName :" + s.name + " not founded");
+            //Debug.LogWarning("clipName :" + s.name + " not founded");
             return;
         }
         if(s.source.isPlaying)s.source.Stop();
@@ -53,7 +54,7 @@ public class AudioManager : MonoBehaviour
         Sounds s = Array.Find(sounds, sound => sound.name == clipName);
         if (s == null)
         {
-            Debug.LogWarning("clipName :" + s.name + " not founded");
+            //Debug.LogWarning("clipName :" + s.name + " not founded");
             return;
         }
         if (s.source.isPlaying) s.source.Pause();
@@ -63,7 +64,7 @@ public class AudioManager : MonoBehaviour
         Sounds s = Array.Find(sounds, sound => sound.name == clipName);
         if (s == null)
         {
-            Debug.LogWarning("clipName :" + s.name + " not founded");
+            //Debug.LogWarning("clipName :" + s.name + " not founded");
             return;
         }
         if (!s.source.isPlaying) s.source.UnPause();
@@ -94,7 +95,7 @@ public class AudioManager : MonoBehaviour
         Sounds s = Array.Find(sounds, sound => sound.name == clipName);
         if (s == null)
         {
-            Debug.LogWarning("clipName :" + s.name + " not founded");
+            //Debug.LogWarning("clipName :" + s.name + " not founded");
             return;
         }
         s.volume = volume;
