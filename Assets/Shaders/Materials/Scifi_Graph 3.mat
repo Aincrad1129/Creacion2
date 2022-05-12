@@ -46,10 +46,10 @@ Material:
     - Vector1_7b46e8ad0a4745df872cfebf7ffa5074: 0
     - Vector1_fda20c76d8434ec9885fa438bae753b6: -0.15
     - Vector1_fe2f712bd1154128bf16a31c7059d0e3: 10
-    - _ScanIntensity: 1.5
+    - _ScanIntensity: 10
     m_Colors:
     - Color_52a723fad2a04a13a6162357db6e22e7: {r: 0, g: 1, b: 0.9294118, a: 1}
     - Color_5b1556d5a53b40e4a1b6f13c1c56de66: {r: 0, g: 1, b: 0.93664265, a: 1}
     - Vector2_904d65dfa58748f491f954f3064b75a3: {r: 1, g: 1, b: 0, a: 0}
-    - _ScanColor: {r: 1, g: 1, b: 1, a: 1}
+    - _ScanColor: {r: 0, g: 1, b: 1, a: 1}
   m_BuildTextureStacks: []

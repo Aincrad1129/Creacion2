@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
@@ -24,8 +25,15 @@ public class MainMenu : BaseMenu
     [Header("Configuration")]
     [SerializeField] float Intensity = 2f;
 
+    [Header("Sound")]
+    [SerializeField] private float delay;
+    [SerializeField] private AudioSource intro;
+    [SerializeField] private AudioSource musicaMenu;
+
 
     void Start() {
+
+        StartCoroutine(PlayMusicMenu());
         StartPanel.SetActive(true);
         BtnStart.SetActive(true);
         MenuPanel.SetActive(false);
@@ -42,6 +50,17 @@ public class MainMenu : BaseMenu
         }
         playerControls.UI.Pause.performed += i => StartBtn();
         playerControls.UI.Cancel.performed += i => BackBtn();
+    }
+
+    IEnumerator PlayMusicMenu()
+    {
+        intro.Play();
+        print("intro");
+        yield return new WaitForSeconds(delay);
+        intro.Stop();
+        print("intro detenida");
+        musicaMenu.Play();
+        print("menu");
     }
 
     public void StartBtn()
