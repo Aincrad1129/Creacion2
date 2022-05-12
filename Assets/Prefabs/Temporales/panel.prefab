@@ -17,7 +17,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &8277134053712331933
 Transform:
@@ -189,6 +189,10 @@ PrefabInstance:
     - target: {fileID: 8839986285268130193, guid: 9c0f69c0e22da8c4b91b7db117ecafee, type: 3}
       propertyPath: m_Name
       value: Suitcase_Flat_Flap_snaps012
+      objectReference: {fileID: 0}
+    - target: {fileID: 8839986285268130193, guid: 9c0f69c0e22da8c4b91b7db117ecafee, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9c0f69c0e22da8c4b91b7db117ecafee, type: 3}

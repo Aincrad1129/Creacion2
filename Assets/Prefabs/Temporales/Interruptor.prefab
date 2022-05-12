@@ -98,6 +98,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Control_Panel_01_snaps012
       objectReference: {fileID: 0}
+    - target: {fileID: 4674866754547009835, guid: 7b7c111e2ea680246a639c3bccd5150a, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7b7c111e2ea680246a639c3bccd5150a, type: 3}
 --- !u!4 &2472342957796483667 stripped
