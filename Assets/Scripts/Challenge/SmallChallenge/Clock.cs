@@ -48,9 +48,8 @@ public class Clock : MonoBehaviour
             clockChallenge.CompareClock(this);
         }
     }
-    private void UpdateText() {
-        timeText.text = string.Concat((_seconds / 3600).ToString("00"),":", ((_seconds / 60) % 60).ToString("00"),":", (_seconds % 60).ToString("00"));
-    }
+    private void UpdateText() => timeText.text = string.Concat((_seconds / 3600).ToString("00"),":", ((_seconds / 60) % 60).ToString("00"),":", (_seconds % 60).ToString("00"));
+    
 
 
 }

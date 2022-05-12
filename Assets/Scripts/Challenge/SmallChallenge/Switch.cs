@@ -43,5 +43,12 @@ public class Switch : MonoBehaviour
         this.GetComponent<MeshRenderer>().material = mat;
         switchChallenge.CheckRandomState();
     }
+    public void EnactiveButtons() {
+        for (int i = 0; i < buttonSwitchs.Count; i++)
+        {
+            buttonSwitchs[i].GetComponentInChildren<TriggerAction>().enabled = false;
+        }
+
+    }
 
 }

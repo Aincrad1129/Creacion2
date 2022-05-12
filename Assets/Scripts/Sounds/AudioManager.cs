@@ -33,9 +33,19 @@ public class AudioManager : MonoBehaviour
                 return;
             }
        if (!s.source.isPlaying)  s.source.Play();
+    }
 
+    public void PlayRepeatSound(string clipName)
+    {
 
-
+        Sounds s = Array.Find(sounds, sound => sound.name == clipName);
+        if (s == null)
+        {
+            //Debug.LogWarning("clipName :" + s.name + " not founded");
+            return;
+        }
+        if (s.source.isPlaying) s.source.Stop();
+        s.source.Play();
     }
 
     public void StopSound(string clipName)
