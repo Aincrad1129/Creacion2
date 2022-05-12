@@ -13,6 +13,7 @@ public class KillPlayer : MonoBehaviour
     [SerializeField] private GameObject restartUi;
     [SerializeField] private CineMachineSwitch cineMachineSwitch;
     [SerializeField] private int timeRestart;
+    [SerializeField] private Consejos consejos;
     public int playerTimeRestart { get => timeRestart; }
     private bool _playerDead;
     public bool playerDead { get => _playerDead; }
@@ -32,6 +33,7 @@ public class KillPlayer : MonoBehaviour
     {
         _playerDead = true; 
         gameManager.setPause(true);
+        consejos.SetDialogo();
         restartUi.SetActive(true);
         cineMachineSwitch.animator.SetBool("ResetLevel", true);
         if (gameManager.finalChallenge.isUnlocked) gameManager.finalChallenge.Restart();
