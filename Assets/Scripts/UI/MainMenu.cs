@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 
 public class MainMenu : BaseMenu
 {
@@ -8,12 +9,13 @@ public class MainMenu : BaseMenu
     [SerializeField] private SelectButton ButtonOpciones;
     [SerializeField] private SelectButton ButtonCreditos;
     [SerializeField] private SelectButton ButtonSalir;
+    [SerializeField] private GameObject BtnStart;
 
     [Header("Menus")]
     [SerializeField] private GameObject StartPanel;
-    [SerializeField] private GameObject BtnStart;
     [SerializeField] private GameObject MenuPanel;
     [SerializeField] private GameObject ControlesPanel;
+    [SerializeField] private GameObject CreditosPanel;
 
     [Header("Materials")]
     [SerializeField] Material[] ScifiGraph;
@@ -27,6 +29,7 @@ public class MainMenu : BaseMenu
         StartPanel.SetActive(true);
         BtnStart.SetActive(true);
         MenuPanel.SetActive(false);
+        CreditosPanel.SetActive(false);
         ButtonJugar.Select();
         foreach (Material item in ScifiGraph)
         {
@@ -37,7 +40,8 @@ public class MainMenu : BaseMenu
         {
             item.SetFloat("_BreatheEffect", 0);
         }
-        ButtonJugar.onClick.AddListener(() => GoToMenu(MenuPanel));
+        playerControls.UI.Pause.performed += i => StartBtn();
+        playerControls.UI.Cancel.performed += i => BackBtn();
     }
 
     public void StartBtn()
@@ -49,5 +53,33 @@ public class MainMenu : BaseMenu
             item.SetColor("_ScanColor", Color.white);
             item.SetFloat("_ScanIntensity", Intensity);
         }
+    }
+
+    public void BackBtn()
+    {
+        ControlesPanel.SetActive(false);
+        CreditosPanel.SetActive(false);
+        MenuPanel.SetActive(true);
+    }
+
+    public void Controles()
+    {
+        ControlesPanel.SetActive(true);
+        MenuPanel.SetActive(false);
+    }
+
+    public void Creditos()
+    {
+        CreditosPanel.SetActive(true);
+    }
+
+    public void Jugar()
+    {
+        SceneManager.LoadScene(2);
+    }
+
+    public void Salir()
+    {
+        Application.Quit();
     }
 }

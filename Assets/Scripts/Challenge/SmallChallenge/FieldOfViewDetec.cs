@@ -163,10 +163,10 @@ public class FieldOfViewDetec : MonoBehaviour
         {
             if (visionAngle <= 0) return;
             float halfVisionAngle = visionAngle / 2;
-            Handles.color = baseMat.color;
+            //Handles.color = baseMat.color;
             Vector3 discPostition = this.transform.position + (this.transform.forward * visionDistance);
             float discRadius = visionDistance * Mathf.Tan(halfVisionAngle * Mathf.Deg2Rad);
-            Handles.DrawSolidDisc(discPostition, this.transform.forward, discRadius);
+            //Handles.DrawSolidDisc(discPostition, this.transform.forward, discRadius);
             Gizmos.DrawLine(this.transform.position, this.transform.position + (this.transform.forward * visionDistance));
             int linesAmount = sides / 4;
             for (int i = 0; i < linesAmount; i++)
@@ -178,7 +178,7 @@ public class FieldOfViewDetec : MonoBehaviour
                 discPostition + ((Vector3.Slerp(this.transform.up, this.transform.right, (float)i / linesAmount)) * discRadius),
                 discPostition + ((Vector3.Slerp(this.transform.up, this.transform.right, (float)(i+1) / linesAmount)) * discRadius)
                };
-                Handles.DrawSolidRectangleWithOutline(verts, baseMat.color, baseMat.color);
+                //Handles.DrawSolidRectangleWithOutline(verts, baseMat.color, baseMat.color);
                 verts = new Vector3[]
                {
                 this.transform.position,
@@ -186,7 +186,7 @@ public class FieldOfViewDetec : MonoBehaviour
                 discPostition - ((Vector3.Slerp(this.transform.up, this.transform.right, (float)i / linesAmount)) * discRadius),
                 discPostition - ((Vector3.Slerp(this.transform.up, this.transform.right, (float)(i+1) / linesAmount)) * discRadius)
                };
-                Handles.DrawSolidRectangleWithOutline(verts, baseMat.color, baseMat.color);
+                //Handles.DrawSolidRectangleWithOutline(verts, baseMat.color, baseMat.color);
                 verts = new Vector3[]
                {
                 this.transform.position,
@@ -194,7 +194,7 @@ public class FieldOfViewDetec : MonoBehaviour
                 discPostition + ((Vector3.Slerp(this.transform.up, -this.transform.right, (float)i / linesAmount)) * discRadius),
                 discPostition + ((Vector3.Slerp(this.transform.up, -this.transform.right, (float)(i+1) / linesAmount)) * discRadius)
                };
-                Handles.DrawSolidRectangleWithOutline(verts, baseMat.color, baseMat.color);
+                //Handles.DrawSolidRectangleWithOutline(verts, baseMat.color, baseMat.color);
                 verts = new Vector3[]
                {
                 this.transform.position,
@@ -202,7 +202,7 @@ public class FieldOfViewDetec : MonoBehaviour
                 discPostition - ((Vector3.Slerp(this.transform.up, -this.transform.right, (float)i / linesAmount)) * discRadius),
                 discPostition - ((Vector3.Slerp(this.transform.up, -this.transform.right, (float)(i+1) / linesAmount)) * discRadius)
                };
-                Handles.DrawSolidRectangleWithOutline(verts, baseMat.color, baseMat.color);
+                //Handles.DrawSolidRectangleWithOutline(verts, baseMat.color, baseMat.color);
             }
         }
 

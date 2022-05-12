@@ -6,7 +6,6 @@ public class BaseMenu : MonoBehaviour
 {
     [Header("Base Menu")]
     protected PlayerControls playerControls;
-    [SerializeField] private GameObject fadeInImage;
 
 
     private void Awake()
@@ -29,10 +28,5 @@ public class BaseMenu : MonoBehaviour
         playerControls.Disable();
     }
 
-    public void GoToMenu(GameObject menuToLoad)
-    {
-        fadeInImage.SetActive(true);
-        menuToLoad.SetActive(true);
-    }
 
 }

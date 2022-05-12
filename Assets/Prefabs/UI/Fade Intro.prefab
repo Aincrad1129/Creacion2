@@ -13,12 +13,12 @@ GameObject:
   - component: {fileID: 2332348323752237135}
   - component: {fileID: 2332348323752237133}
   m_Layer: 5
-  m_Name: Fade In
+  m_Name: Fade Intro
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2332348323752237120
 RectTransform:
   m_ObjectHideFlags: 0
