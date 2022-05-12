@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -20,9 +19,14 @@ public class GameManager : MonoBehaviour
 
     private KillPlayer killPlayer;
 
+    [Header("Sounds")]
+    [Tooltip("Rigth sound name")]
+    [SerializeField] private string rigthSoundName;
+    private AudioManager audioManager;
     private void Awake()
     {
-    }
+        audioManager = FindObjectOfType<AudioManager>();
+}
     // Start is called before the first frame update
     void Start()
     {
@@ -30,18 +34,14 @@ public class GameManager : MonoBehaviour
         killPlayer.SetRespawnPoitn(startSpawnPoint);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+
     public void AddNewPlayer(InputAction input) {
         //index = Random.Range(0,players.Count);
 
     }
     public void checkChallenges() {
-        
-        if(challenges.TrueForAll(x => x.GetComponent<IChallenge>().getCompleted() == true)){
+        audioManager.PlaySound(rigthSoundName);
+        if (challenges.TrueForAll(x => x.GetComponent<IChallenge>().getCompleted() == true)){
             finalChallenge.isUnlocked = true;
             finalChallenge.door.SetActive(false);
         }

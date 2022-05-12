@@ -43,7 +43,9 @@ public class FieldOfViewDetec : MonoBehaviour
     [Tooltip("Tiempo para que la camara mate al jugador")]
     [SerializeField] private int cameraTime;
 
-
+    [Header("Sounds")]
+    [Tooltip("SounName")]
+    [SerializeField] private string soundName = "empty";
 
 
     private float timer;
@@ -54,6 +56,7 @@ public class FieldOfViewDetec : MonoBehaviour
     private bool isOn;
 
     private KillPlayer killPlayer;
+    private AudioManager audioManager ;
 
     private void Awake()
     {
@@ -63,6 +66,7 @@ public class FieldOfViewDetec : MonoBehaviour
         showGuide = false;
         cameraViewObject.GetComponent<ObjectCollider>().CollideWithPlayerEnter += () => PlayerEnter();
         cameraViewObject.GetComponent<ObjectCollider>().CollideWithPlayerExit += () => PlayerExit();
+        audioManager = FindObjectOfType<AudioManager>();
         PlayerExit();
     }
     private void GeterateMesh()
@@ -120,6 +124,7 @@ public class FieldOfViewDetec : MonoBehaviour
     {
         if (gameManager.pause) return;
         if (!isOn) return;
+        audioManager.PlaySound(soundName);
         _isviewingPlayer = true;
         meshRenderer.material = alertaMat;
         alertUI.SetActive(true);
@@ -139,6 +144,7 @@ public class FieldOfViewDetec : MonoBehaviour
     }
     private void PlayerExit()
     {
+        audioManager.StopSound(soundName);
         _isviewingPlayer = false;
         meshRenderer.material = baseMat;
         alertUI.SetActive(false);

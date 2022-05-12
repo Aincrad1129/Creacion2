@@ -20,12 +20,20 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float playerSpeed;
     [SerializeField] private LayerMask ground;
 
+    [Header("Sounds")]
+    [Tooltip("Walk sound name")]
+    [SerializeField] private string walkSoundName;
+    [Tooltip("Jump soun name")]
+    [SerializeField] private string jumpSoundName;
+    private AudioManager audioManager;
+
 
     private void Awake()
     {
         playerAnimator = this.GetComponent<Animator>();
         playerRigidbody = this.GetComponent<Rigidbody>();
         cameraTransform = Camera.main.transform;
+        audioManager = FindObjectOfType<AudioManager>();
     }   
     private void OnEnable()
     {
@@ -43,53 +51,12 @@ public class PlayerMovement : MonoBehaviour
         playerControls.Disable();
     }
 
-   
-    
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        // isGround = OnGround();
-        //playerAnimator.SetBool("Ground", isGround);
-        //playerAnimator.SetFloat("Falling", playerRigidbody.velocity.y);
-
-        ////if (isGround)
-        ////{
-        ////    playerAnimator.SetBool("Ground", true);
-
-        ////}
-        ////else { 
-        ////    playerAnimator.SetBool("Ground", false);
-        ////    //playerAnimator.SetBool("Jump", false);
-        ////    playerAnimator.SetFloat("Falling", playerRigidbody.velocity.y);
-        ////}
-        //if (gameManager.pause) return;
-        ////Move();
-        //Rotate();
-        
-    }
 
     private void FixedUpdate()
     {
         isGround = OnGround();
         playerAnimator.SetBool("Ground", isGround);
         playerAnimator.SetFloat("Falling", playerRigidbody.velocity.y);
-
-        //if (isGround)
-        //{
-        //    playerAnimator.SetBool("Ground", true);
-
-        //}
-        //else { 
-        //    playerAnimator.SetBool("Ground", false);
-        //    //playerAnimator.SetBool("Jump", false);
-        //    playerAnimator.SetFloat("Falling", playerRigidbody.velocity.y);
-        //}
         if (gameManager.pause) return;
         Move();
         Rotate();
@@ -106,8 +73,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (gameManager.pause)
             return;
-
-        
+        audioManager.PlaySound(walkSoundName);
         playerAnimator.SetFloat("Run",   Mathf.Clamp(Mathf.Abs(directionInput.magnitude),0,1));
         moveVec = cameraTransform.forward * directionInput.y;
         moveVec = moveVec + cameraTransform.right * directionInput.x;
@@ -156,9 +122,8 @@ public class PlayerMovement : MonoBehaviour
 
         if (isGround)
         {
-            print("saltando");
+            audioManager.PlaySound(jumpSoundName);
             playerAnimator.SetBool("Jump", true);
-            print(playerAnimator.GetBool("Jump"));
             playerAnimator.SetBool("Ground", false);
             playerRigidbody.AddForce(Vector3.up * jumpSpeed, ForceMode.Impulse);
             //playerAnimator.SetBool("Jump", false);

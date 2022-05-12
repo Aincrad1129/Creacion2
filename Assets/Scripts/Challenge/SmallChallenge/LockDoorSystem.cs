@@ -20,9 +20,15 @@ public class LockDoorSystem : MonoBehaviour, IChallenge
 
     [SerializeField] private EventSystem eventSystem;
     [SerializeField] private GameObject StartButtonUI;
+
     private bool CanPress = false;
 
-
+    [Header("Sounds")]
+    [Tooltip("Rigth soun name")]
+    [SerializeField] private string rigthSoundName;
+    [Tooltip("Wrong soun name")]
+    [SerializeField] private string WrongSoundName;
+    private AudioManager audioManager;
 
     private int indexPassword = 0;
     private void Awake()
@@ -30,8 +36,9 @@ public class LockDoorSystem : MonoBehaviour, IChallenge
         int randompasword = UnityEngine.Random.Range(0, 9999);
         password = randompasword.ToString("0000");
         lightsChallenge.passwordText.text = password;
+        audioManager = FindObjectOfType<AudioManager>();
+
     }
-    // Start is called before the first frame update
     void Start()
     {
         
@@ -41,11 +48,6 @@ public class LockDoorSystem : MonoBehaviour, IChallenge
         
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
     public void getNumber(string number)
     {
         if (!CanPress)
@@ -66,6 +68,7 @@ public class LockDoorSystem : MonoBehaviour, IChallenge
             lightSignal.color = Color.green;
             CompletePassword(false);
             lightsChallenge.Complete();
+            audioManager.PlaySound(rigthSoundName);
             //door.SetActive(false);
         }
         else
@@ -75,6 +78,8 @@ public class LockDoorSystem : MonoBehaviour, IChallenge
             passwordText.text = " ";
             currentPassword = "";
             indexPassword = 0;
+            audioManager.PlaySound(WrongSoundName);
+
         }
     }
     public void OpenKeyPadUI()

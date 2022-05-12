@@ -17,6 +17,7 @@ public class LightsChallenge : MonoBehaviour, IChallenge
     [SerializeField] private GameObject completeIndicator;
     [SerializeField] private Material activeMaterial;
     private bool isLightOn;
+
     // Start is called before the first frame update
     void Start()
     {

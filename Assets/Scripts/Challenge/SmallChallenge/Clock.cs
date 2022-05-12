@@ -1,7 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using TMPro;
 
 public class Clock : MonoBehaviour
@@ -24,9 +21,6 @@ public class Clock : MonoBehaviour
     {
         InvokeRepeating("UpdateTime",0,1);
     }
-    // Start is called before the first frame update
-
-    // Update is called once per frame
     public void UpdateTime() {
         if (isComplete) {
             CancelInvoke("UpdateTime");
