@@ -100,14 +100,5 @@ public class FinalChallange : MonoBehaviour, IChallenge
         await Task.Delay(TimeSpan.FromSeconds(timeToStartMovePlatform));
         moveLaser = true;
         audioManager.PlaySound(FinalSound);
-        /*
-        while (!killPlayer.playerDead || !isComplete)
-        {
-            laser.transform.position += Vector3.up;
-        }*/
     }
-
-
-
-
 }

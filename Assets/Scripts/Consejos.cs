@@ -24,8 +24,6 @@ public class Consejos : MonoBehaviour
 
     public void SetDialogo() {
         int index = Random.Range(0,consejos.Count *2 -1);
-        print("index"+index );
-        print(index % (consejos.Count - 1));
         TextDialogo.text = consejos[index % consejos.Count];
     }
 }

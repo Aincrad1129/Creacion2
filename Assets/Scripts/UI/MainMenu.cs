@@ -28,6 +28,8 @@ public class MainMenu : BaseMenu
     [Header("Sound")]
     [SerializeField] private AudioSource musicaMenu;
 
+    [Header("Animacion Creditos")]
+    [SerializeField] private Animar_texto animar_Texto;
 
     void Start() {
 
@@ -53,6 +55,7 @@ public class MainMenu : BaseMenu
 
     public void StartBtn()
     {
+        if (ControlesPanel.activeInHierarchy || CreditosPanel.activeInHierarchy) return;
         BtnStart.SetActive(false);
         MenuPanel.SetActive(true);
         foreach (Material item in ScifiGraph)
@@ -64,6 +67,7 @@ public class MainMenu : BaseMenu
 
     public void BackBtn()
     {
+        if (CreditosPanel.activeInHierarchy) animar_Texto.PararDeEscribir();
         ControlesPanel.SetActive(false);
         CreditosPanel.SetActive(false);
         MenuPanel.SetActive(true);
@@ -73,11 +77,14 @@ public class MainMenu : BaseMenu
     {
         ControlesPanel.SetActive(true);
         MenuPanel.SetActive(false);
+       
     }
 
     public void Creditos()
     {
         CreditosPanel.SetActive(true);
+        animar_Texto.ComenzarAEscribir();
+        MenuPanel.SetActive(false);
     }
 
     public void Jugar()

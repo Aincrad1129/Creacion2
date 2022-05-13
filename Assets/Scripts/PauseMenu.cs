@@ -24,7 +24,10 @@ public class PauseMenu : MonoBehaviour
 
         playerControls.Enable();
     }
-
+    private void OnDisable()
+    {
+        playerControls.Disable();
+    }
     private void setPause()
     {
         gameManager.setPause(!gameManager.pause);
@@ -32,10 +35,7 @@ public class PauseMenu : MonoBehaviour
         Time.timeScale = gameManager.pause ? 0 : 1;
     }
 
-    private void OnDisable()
-    {
-        playerControls.Disable();
-    }
+   
     public void Resume ()
     {
         pauseMenuUI.SetActive(false);

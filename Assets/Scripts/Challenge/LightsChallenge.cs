@@ -51,6 +51,7 @@ public class LightsChallenge : MonoBehaviour, IChallenge
         Debug.Log("Complete:" + GetType().Name);
         isComplete = true;
         completeIndicator.GetComponent<MeshRenderer>().material = activeMaterial;
+        audioManager.PlaySound(AbrirPuerta);
         abrirL.enabled = true;
         abrirR.enabled = true;
         gameManager.checkChallenges();
