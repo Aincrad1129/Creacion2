@@ -25,7 +25,6 @@ public class AudioManager : MonoBehaviour
     // Update is called once per frame
     public void PlaySound(string clipName)
     {
- 
             Sounds s = Array.Find(sounds, sound => sound.name == clipName);
             if (s == null)
             {

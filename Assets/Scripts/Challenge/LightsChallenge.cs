@@ -65,6 +65,7 @@ public class LightsChallenge : MonoBehaviour, IChallenge
     }
 
     public async void SetLigth() {
+        if (passwordText.gameObject.activeInHierarchy) return;
         audioManager.PlaySound(OffSound);
         passwordText.gameObject.SetActive(true);
         fieldOfViewDetec.ForEach(x => x.SwitchOn_OFFCamera(false));

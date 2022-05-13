@@ -21,8 +21,9 @@ public class FinalChallange : MonoBehaviour, IChallenge
     private Vector3 startPositionLaser;
     [HideInInspector]public bool isUnlocked;
     private bool moveLaser = false;
-
-    [SerializeField] private string FinalSound, Fondo;
+    [SerializeField] private Animator abrirL, abrirR;
+    [SerializeField] private string AbrirPuerta;
+    [SerializeField] private string laserSound, Fondo,finalSound;
     private AudioManager audioManager;
 
     private KillPlayer killPlayer;
@@ -44,14 +45,15 @@ public class FinalChallange : MonoBehaviour, IChallenge
     {
         if (moveLaser) 
         {
-            audioManager.PlaySound(FinalSound);
             laser.transform.position += (Vector3.up * 0.5f) * Time.deltaTime;
+            audioManager.PlaySound(laserSound);
         }
         if (killPlayer.playerDead)
         {
             laser.transform.position = startPositionLaser;
             moveLaser = false;
-            audioManager.StopSound(FinalSound);
+            audioManager.StopSound(laserSound);
+            audioManager.StopSound(finalSound);
         }
         
     }
@@ -86,7 +88,10 @@ public class FinalChallange : MonoBehaviour, IChallenge
     {
         if (other.CompareTag("Player")) {
             if (isUnlocked) {
+                abrirL.SetBool("abrir", false);
+                abrirR.SetBool("abrir", false);
                 audioManager.StopSound(Fondo);
+                audioManager.PlayRepeatSound(finalSound);
                 cineMachineSwitch.animator.SetBool("WorldCamera", true);
                 gameManager.finalChallengeUnloke = true;
                 killPlayer.SetRespawnPoitn(respawnPoint);
@@ -99,6 +104,5 @@ public class FinalChallange : MonoBehaviour, IChallenge
     {
         await Task.Delay(TimeSpan.FromSeconds(timeToStartMovePlatform));
         moveLaser = true;
-        audioManager.PlaySound(FinalSound);
     }
 }

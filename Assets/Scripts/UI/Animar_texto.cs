@@ -51,6 +51,10 @@ public class Animar_texto : MonoBehaviour
 }
     public void PararDeEscribir() {
         CancelInvoke("Escribir");
-        if(limpiarCreditosAlSalir) indexOracion = 0;
+        if (limpiarCreditosAlSalir)
+        {
+            indexOracion = 0;
+            frase.text = "";
+        }
     }   
  }

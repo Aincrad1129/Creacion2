@@ -71,6 +71,8 @@ public class LockDoorSystem : MonoBehaviour, IChallenge
             CompletePassword(false);
             lightsChallenge.Complete();
             audioManager.PlaySound(rigthSoundName);
+            passwordText.text = " ";
+            currentPassword = "";
             //door.SetActive(false);
         }
         else
@@ -87,7 +89,7 @@ public class LockDoorSystem : MonoBehaviour, IChallenge
     public void OpenKeyPadUI()
     {
 
-        if (lightsChallenge.AnyCameraViewPLayer()) return;
+        if (lightsChallenge.AnyCameraViewPLayer() || lightsChallenge.getCompleted()) return;
         KeypadUI.SetActive(true);
         eventSystem.SetSelectedGameObject(StartButtonUI);
         gameManager.setPause(true);
