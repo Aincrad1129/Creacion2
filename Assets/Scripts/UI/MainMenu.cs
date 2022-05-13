@@ -26,14 +26,12 @@ public class MainMenu : BaseMenu
     [SerializeField] float Intensity = 2f;
 
     [Header("Sound")]
-    [SerializeField] private float delay;
-    [SerializeField] private AudioSource intro;
     [SerializeField] private AudioSource musicaMenu;
 
 
     void Start() {
 
-        StartCoroutine(PlayMusicMenu());
+        musicaMenu.Play();
         StartPanel.SetActive(true);
         BtnStart.SetActive(true);
         MenuPanel.SetActive(false);
@@ -52,16 +50,6 @@ public class MainMenu : BaseMenu
         playerControls.UI.Cancel.performed += i => BackBtn();
     }
 
-    IEnumerator PlayMusicMenu()
-    {
-        intro.Play();
-        print("intro");
-        yield return new WaitForSeconds(delay);
-        intro.Stop();
-        print("intro detenida");
-        musicaMenu.Play();
-        print("menu");
-    }
 
     public void StartBtn()
     {
